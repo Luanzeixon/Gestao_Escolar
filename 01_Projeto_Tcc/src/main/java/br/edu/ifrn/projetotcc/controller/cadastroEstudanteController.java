@@ -22,7 +22,7 @@ public class cadastroEstudanteController {
 	
 	@PostMapping("/salvar")
 	public String salvarCadastroEstudnate(Usuario usuario, RedirectAttributes attr) {
-		
+		usuario.setTipo("ESTUDANTE");
 		return "redirect:/usuarios/cadastroEstudante";
 	}
 }
