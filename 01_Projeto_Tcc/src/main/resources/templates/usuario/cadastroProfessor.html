@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form th:action="@{/usuarios/salvarProfessor}" th:object="${usuario}"
+	method="post" >
+	
+	<div th:replace="fragment/mensagens"></div>
+	
+	<input type="hidden" th:field="${usuario.id}">
+	
+		<table>
+				<tr>
+					<td>Nome:</td>
+					<td><input type="text" th:field="${usuario.nome}"> 
+					</td>
+				</tr>
+				<tr>
+					<td>Email:</td>
+					<td><input type="email" th:field="${usuario.email}"></td>
+				</tr>
+				<tr>
+					<td>Senha:</td>
+					<td><input type="password" th:field="${usuario.senha}">
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<input type="submit"
+						th:value="${usuario.id} == 0 ? Cadastrar : Editar"> <input
+						type="submit" value="Cancelar" formaction="/" formmethod="get">
+					</td>
+				</tr>
+	</form>
+</body>
+</html>
