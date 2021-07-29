@@ -1,6 +1,7 @@
 package br.edu.ifrn.projetotcc.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
@@ -28,6 +29,11 @@ public class cadastroEstudanteController {
 	@PostMapping("/salvar")
 	@Transactional(readOnly = false)
 	public String salvarCadastroEstudante(Usuario usuario, RedirectAttributes attr) {
+		
+		String senhaCriptografada = 
+				new BCryptPasswordEncoder().encode(usuario.getSenha());
+		usuario.setSenha(senhaCriptografada);
+		
 		usuario.setTipo("ESTUDANTE");
 		
 		usuarioRepository.save(usuario);
