@@ -15,31 +15,33 @@ import br.edu.ifrn.projetotcc.repository.UsuarioRepository;
 
 @Controller
 @RequestMapping("/usuarios")
-public class cadastroSecretarioController {
-
+public class cadastroParenteController {
+	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
-	
-	@GetMapping("/cadastroSecretario")
-	public String entrarCadastroParente(ModelMap model) {
+
+	@GetMapping("/cadastroParente")
+	public String entrarCadastroEstudante(ModelMap model) {
 		model.addAttribute("usuario", new Usuario());
-		return "usuario/cadastroSecretario";
+		return "usuario/cadastroParente";
 	}
-	
-	@PostMapping("/salvarSecretario")
+
+	@PostMapping("/salvarParente")
 	@Transactional(readOnly = false)
-	public String salvarCadastroSecretario(Usuario usuario, RedirectAttributes attr) {
+	public String salvarCadastroParente(Usuario usuario, RedirectAttributes attr) {
 		
 		String senhaCriptografada = 
 				new BCryptPasswordEncoder().encode(usuario.getSenha());
 		usuario.setSenha(senhaCriptografada);
 		
-		usuario.setTipo("SECRETARIO");
+		usuario.setTipo("PARENTE");
 		
 		usuarioRepository.save(usuario);
 		
-		attr.addFlashAttribute("msgSucesso", "Secretario inserido com sucesso");
+		attr.addFlashAttribute("msgSucesso", "Parente inserido com sucesso");
 
-		return "redirect:/usuarios/cadastroSecretario";
+		return "redirect:/usuarios/cadastroParente";
 	}
+	
+	
 }

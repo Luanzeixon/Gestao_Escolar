@@ -38,7 +38,7 @@ public class cadastroProfessorController {
 		
 		usuarioRepository.save(usuario);
 		
-		attr.addFlashAttribute("msgSucesso", "Estudante inserido com sucesso");
+		attr.addFlashAttribute("msgSucesso", "Professor inserido com sucesso");
 
 		return "redirect:/usuarios/cadastroProfessor";
 	}
