@@ -21,7 +21,7 @@ public class UsuarioService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		Usuario usuario = repository.findByCpf(username)
+		Usuario usuario = repository.findByEmail(username)
 				.orElseThrow(() -> new UsernameNotFoundException("Usuario não encontrado"));
 
 		return new User(usuario.getEmail(), usuario.getSenha(), new ArrayList<>());

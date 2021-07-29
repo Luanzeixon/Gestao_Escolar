@@ -11,8 +11,8 @@ import br.edu.ifrn.projetotcc.dominio.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario,Integer> {
 	
-	@Query("select u from Usuario u where u.cpf like %:cpf%") 
-	Optional<Usuario> findByCpf(@Param("cpf") String email);
+	@Query("select u from Usuario u where u.email like %:email%") 
+	Optional<Usuario> findByEmail(@Param("email") String email);
 		
 	
 }
