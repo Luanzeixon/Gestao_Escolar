@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class inicioCotroller {
-	
+
 	@GetMapping("/")
-	public String inicio(){
-		
+	public String inicio() {
+
 		return "inicio";
 	}
-	
+
 }

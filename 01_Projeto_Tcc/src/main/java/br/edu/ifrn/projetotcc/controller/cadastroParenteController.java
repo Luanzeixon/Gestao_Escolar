@@ -1,11 +1,14 @@
 package br.edu.ifrn.projetotcc.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -16,7 +19,7 @@ import br.edu.ifrn.projetotcc.repository.UsuarioRepository;
 @Controller
 @RequestMapping("/usuarios")
 public class cadastroParenteController {
-	
+
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 
@@ -29,19 +32,19 @@ public class cadastroParenteController {
 	@PostMapping("/salvarParente")
 	@Transactional(readOnly = false)
 	public String salvarCadastroParente(Usuario usuario, RedirectAttributes attr) {
-		
-		String senhaCriptografada = 
-				new BCryptPasswordEncoder().encode(usuario.getSenha());
+
+		String senhaCriptografada = new BCryptPasswordEncoder().encode(usuario.getSenha());
 		usuario.setSenha(senhaCriptografada);
-		
+
 		usuario.setTipo("PARENTE");
-		
+
 		usuarioRepository.save(usuario);
-		
+
 		attr.addFlashAttribute("msgSucesso", "Parente inserido com sucesso");
 
 		return "redirect:/usuarios/cadastroParente";
 	}
 	
 	
+
 }

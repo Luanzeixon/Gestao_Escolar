@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div th:replace="fragment/mensagens"></div>
+	<form th:action="@{/usuarios/buscar}" method="get">
+		<table>
+			<tr>
+				<td>Nome:</td>
+				<td><input type="text" th:name="nome"></td>
+			</tr>
+			<tr>
+				<td>Email:</td>
+				<td><input type="email" th:name="email"></td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="checkbox"
+					th:name="mostrarTodosDados" th:value="true" /> Mostrar todos os
+					dados dos usuários</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type="submit" value="buscar" /> <input
+					type="submit" value="cancelar" formaction="/" formmethod="get" />
+				</td>
+			</tr>
+		</table>
+	</form>
+	<div th:if="${not #lists.isEmpty(usuariosEncontrados)}">
+		<table>
+			<tr>
+				<th>Tipo usuario</th>
+				<th>Nome</th>
+				<th>Email</th>
+				<th th:if="${mostrarTodosDados} == true">Matricula</th>
+				<th th:if="${mostrarTodosDados} == true">CPF</th>
+				<th>Opções</th>
+			</tr>
+			<tr th:each="u : ${usuariosEncontrados}">
+				<td th:text="${u.tipo}"></td>
+				<td th:text="${u.nome}"></td>
+				<td th:text="${u.email}"></td>
+				<td th:text="${u.matricula}" th:if="${mostrarTodosDados} == true"></td>
+				<td th:text="${u.cpf}" th:if="${mostrarTodosDados} == true"></td>
+				
+				<td><a th:href="'/usuarios/editar/' + ${u.id}"> 
+						Editar
+				</a> <a th:href="'/usuarios/remover/' + ${u.id}"
+					onclick="if(!confirm('Deseja realmente remover o usuário?')) return false; ">
+						Remover
+				</a></td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

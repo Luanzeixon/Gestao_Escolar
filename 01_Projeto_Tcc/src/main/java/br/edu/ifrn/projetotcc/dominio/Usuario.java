@@ -14,6 +14,9 @@ public class Usuario {
 private int id;
 
 @Column
+private String matricula;
+
+@Column
 private String tipo;
 
 @Column
@@ -96,6 +99,14 @@ public String getTipo() {
 
 public void setTipo(String tipo) {
 	this.tipo = tipo;
+}
+
+public String getMatricula() {
+	return matricula;
+}
+
+public void setMatricula(String matricula) {
+	this.matricula = matricula;
 }
 
 	
