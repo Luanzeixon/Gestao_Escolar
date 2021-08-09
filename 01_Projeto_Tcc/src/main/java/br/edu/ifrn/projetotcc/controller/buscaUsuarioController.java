@@ -9,8 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.edu.ifrn.projetotcc.dominio.Usuario;
@@ -33,8 +35,8 @@ public class buscaUsuarioController {
 	@Transactional(readOnly = false)
 	public String buscar(@RequestParam(name = "nome", required = false) String nome,
 			@RequestParam(name = "email", required = false) String email,
-			@RequestParam(name = "tipo", required = false) String tipo,
-			@RequestParam(name = "mostrarTodosDados", required = false) Boolean mostrarTodosDados, 
+			@RequestParam(name = "mostrarTodosDados", required = false)
+			Boolean mostrarTodosDados, 
 			ModelMap model) {
 		
 		List<Usuario> usuariosEncontrados = usuarioRepository.findByEmailAndNome(email, nome);
@@ -81,4 +83,20 @@ public class buscaUsuarioController {
 		}
 	}
 	
+	@PostMapping("/filtrar")
+	public String filtrar(@RequestParam("tipo") String tipo, ModelMap model,
+			Boolean mostrarTodosDados) {
+		
+		List<Usuario> usuariosEncontrados = usuarioRepository.findByTipo(tipo);
+		
+		model.addAttribute("usuariosEncontrados", usuariosEncontrados);
+		
+		if(mostrarTodosDados != null) {
+			model.addAttribute("mostrarTodosDados", true);
+		}
+		
+		return "usuario/busca";
+		
+		
+	}
 }

@@ -17,18 +17,30 @@
 				<td><input type="email" th:name="email"></td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="checkbox"
-					th:name="mostrarTodosDados" th:value="true" /> Mostrar todos os
-					dados dos usuários</td>
-			</tr>
+					<td colspan="2"><input type="checkbox"
+						th:name="mostrarTodosDados" th:value="true" /> Mostrar todos os
+						dados dos usuários</td>
+				</tr>
 			<tr>
 				<td></td>
 				<td><input type="submit" value="buscar" /> <input
 					type="submit" value="cancelar" formaction="/" formmethod="get" />
 				</td>
 			</tr>
+				
 		</table>
 	</form>
+	<br/>
+	<form th:action="@{/usuarios/filtrar}" th:method="post">
+		<select th:name="tipo">
+					<option th:value="ESTUDANTE">Estudande</option>
+					<option th:value="PARENTE">Parente</option>
+					<option th:value="PROFESSOR">Professor</option>
+					<option th:value="SECRETARIO">Secretario</option>
+				</select> 
+				<input type="submit" value="filtrar">
+	</form>
+
 	<div th:if="${not #lists.isEmpty(usuariosEncontrados)}">
 		<table>
 			<tr>
@@ -45,13 +57,11 @@
 				<td th:text="${u.email}"></td>
 				<td th:text="${u.matricula}" th:if="${mostrarTodosDados} == true"></td>
 				<td th:text="${u.cpf}" th:if="${mostrarTodosDados} == true"></td>
-				
-				<td><a th:href="'/usuarios/editar/' + ${u.id}"> 
-						Editar
-				</a> <a th:href="'/usuarios/remover/' + ${u.id}"
+
+				<td><a th:href="'/usuarios/editar/' + ${u.id}"> Editar </a> <a
+					th:href="'/usuarios/remover/' + ${u.id}"
 					onclick="if(!confirm('Deseja realmente remover o usuário?')) return false; ">
-						Remover
-				</a></td>
+						Remover </a></td>
 			</tr>
 		</table>
 	</div>

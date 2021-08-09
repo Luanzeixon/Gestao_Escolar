@@ -18,6 +18,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario,Integer> {
 	
 	@Query("select u from Usuario u where u.email like %:email%") 
 	Optional<Usuario> findByEmail(@Param("email") String email);
-		
+	
+	@Query("select u from Usuario u where u.tipo like %:tipo%")	
+	List<Usuario> findByTipo(@Param("tipo") String tipo);
 	
 }
