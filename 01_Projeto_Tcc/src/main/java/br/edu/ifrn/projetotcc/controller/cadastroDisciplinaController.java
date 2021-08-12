@@ -37,4 +37,6 @@ public class cadastroDisciplinaController {
 
 		return "redirect:/disciplinas/cadastroDisciplina";
 	}
+	
+	
 }

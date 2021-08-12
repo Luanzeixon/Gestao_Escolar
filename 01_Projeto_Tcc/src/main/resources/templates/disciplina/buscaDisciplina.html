@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div th:replace="fragment/mensagens"></div>
+	<form th:action="@{/disciplinas/buscar}" method="get">
+		<table>
+			<tr>
+				<td>Nome:</td>
+				<td><input type="text" th:name="nome"></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type="submit" value="buscar" /> <input
+					type="submit" value="cancelar" formaction="/" formmethod="get" />
+				</td>
+			</tr>
+				
+		</table>
+	</form>
+	<br/>
+	<div th:if="${not #lists.isEmpty(disciplinasEncontradas)}">
+		<table>
+			<tr>
+				<th>Nome</th>
+				<th>Carga Horaria</th>
+				<th>Opções</th>
+			</tr>
+			<tr th:each="d : ${disciplinasEncontradas}">
+				<td th:text="${d.nome}"></td>
+				<td th:text="${d.carga_horaria}"></td>
+				<td><a th:href="'/disciplinas/editar/' + ${d.id}"> Editar </a> <a
+					th:href="'/disciplinas/remover/' + ${d.id}"
+					onclick="if(!confirm('Deseja realmente remover a Disciplina?')) return false; ">
+						Remover </a></td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>
