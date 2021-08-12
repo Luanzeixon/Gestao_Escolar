@@ -33,7 +33,7 @@ public class inicioCotroller {
         }if(usuario.getTipo().equals("PARENTE")) {
         	return "usuario/paginaParente";
         }if(usuario.getTipo().equals("SECRETARIO") || usuario.getTipo().equals("ADM") ) {
-        	return "inicio";
+        	return "usuario/paginaSecretario";
         }else{
         	return "PaginaErro";
         }

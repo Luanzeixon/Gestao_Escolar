@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<form th:action="@{/disciplinas/salvarDisciplina}" th:object="${disciplina}"
+	method="post" >
+	
+	<div th:replace="fragment/mensagens"></div>
+	
+	<input type="hidden" th:field="${disciplina.id}">
+	
+		<table>
+				<tr>
+					<td>Nome da Disciplina</td>
+					<td><input type="text" th:field="${disciplina.nome}"> 
+					</td>
+				</tr>
+				<tr>
+					<td>Carga Horaria</td>
+					<td><input type="text" th:field="${disciplina.carga_horaria}"></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<input type="submit"
+						th:value="${disciplina.id} == 0 ? Cadastrar : Editar"> <input
+						type="submit" value="Cancelar" formaction="/" formmethod="get">
+					</td>
+				</tr>
+	</form>
+</body>
+</html>
