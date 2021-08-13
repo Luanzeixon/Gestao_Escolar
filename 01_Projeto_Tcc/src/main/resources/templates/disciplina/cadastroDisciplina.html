@@ -8,9 +8,19 @@
 	<form th:action="@{/disciplinas/salvarDisciplina}" th:object="${disciplina}"
 	method="post" >
 	
+	<div th:if="${msgsErro} != null">
+		<ul>
+			<li th:each="m : ${msgsErro}">
+				<b th:text="${m}" style="color: red"></b>
+			</li>
+		</ul>
+	</div>
+	
 	<div th:replace="fragment/mensagens"></div>
 	
 	<input type="hidden" th:field="${disciplina.id}">
+	
+	
 	
 		<table>
 				<tr>
