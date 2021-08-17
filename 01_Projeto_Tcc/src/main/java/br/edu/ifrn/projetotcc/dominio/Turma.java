@@ -1,14 +1,19 @@
 package br.edu.ifrn.projetotcc.dominio;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 @Entity
-public class Disciplina {
-	
+public class Turma {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -17,8 +22,13 @@ public class Disciplina {
 	private String nome;
 	
 	@Column
-	private int carga_horaria;
+	private String data;
 	
+	@OneToMany()
+	private List<Usuario> estudante;
+	
+	@Transient
+	private Usuario tipoEstudante;
 
 	@Override
 	public int hashCode() {
@@ -36,10 +46,20 @@ public class Disciplina {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Disciplina other = (Disciplina) obj;
+		Turma other = (Turma) obj;
 		if (id != other.id)
 			return false;
 		return true;
+	}
+	
+	
+
+	public Usuario getTipoEstudante() {
+		return tipoEstudante;
+	}
+
+	public void setTipoEstudante(Usuario tipoEstudante) {
+		this.tipoEstudante = tipoEstudante;
 	}
 
 	public int getId() {
@@ -50,6 +70,7 @@ public class Disciplina {
 		this.id = id;
 	}
 
+
 	public String getNome() {
 		return nome;
 	}
@@ -58,13 +79,22 @@ public class Disciplina {
 		this.nome = nome;
 	}
 
-	public int getCarga_horaria() {
-		return carga_horaria;
+	public String getData() {
+		return data;
 	}
 
-	public void setCarga_horaria(int carga_horaria) {
-		this.carga_horaria = carga_horaria;
+	public void setData(String data) {
+		this.data = data;
 	}
-	
-	
+
+	public List<Usuario> getEstudante() {
+		return estudante;
+	}
+
+	public void setEstudante(List<Usuario> estudante) {
+		this.estudante = estudante;
+	}
+
+
+
 }

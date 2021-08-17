@@ -6,10 +6,10 @@
 </head>
 <body>
 	<div th:replace="fragment/mensagens"></div>
-	<form th:action="@{/disciplinas/buscar}" method="get">
+	<form th:action="@{/turmas/buscar}" method="get">
 		<table>
 			<tr>
-				<td>Nome:</td>
+				<td>Nome Turma:</td>
 				<td><input type="text" th:name="nome"></td>
 			</tr>
 			<tr>
@@ -22,21 +22,20 @@
 		</table>
 	</form>
 	<br/>
-	<div th:if="${not #lists.isEmpty(disciplinasEncontradas)}">
+	<div th:if="${not #lists.isEmpty(turmasEncontradas)}">
 		<table>
 			<tr>
 				<th>Nome</th>
-				<th>Carga Horaria</th>
+				<th>Data</th>
 				<th>Opções</th>
 			</tr>
-			<tr th:each="d : ${disciplinasEncontradas}">
-				<td th:text="${d.nome}"></td>
-				<td th:text="${d.carga_horaria}"></td>
-				<td><a th:href="'/disciplinas/editar/' + ${d.id}"> Editar </a> <a
-					th:href="'/disciplinas/remover/' + ${d.id}"
-					onclick="if(!confirm('Deseja realmente remover a Disciplina?')) return false; ">
-						Remover </a>
-						</td>
+			<tr th:each="t : ${turmasEncontradas}">
+				<td th:text="${t.nome}"></td>
+				<td th:text="${t.data}"></td>
+				<td><a th:href="'/turmas/editar/' + ${t.id}"> Editar </a> <a
+					th:href="'/turmas/remover/' + ${t.id}"
+					onclick="if(!confirm('Deseja realmente remover a Turma?')) return false; ">
+						Remover </a></td>
 			</tr>
 		</table>
 	</div>

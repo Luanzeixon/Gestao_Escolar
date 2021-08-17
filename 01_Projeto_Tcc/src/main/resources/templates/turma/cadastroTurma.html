@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+	$(function() {
+		$("#estudante").autocomplete({
+			source : "/turmas/autocompleteEstudante",
+			minLengh : 1,
+			select : function(event, ui) {
+				this.value = ui.item.label; 
+				$("#idEstudante").val(ui.item.value); 
+				return false;
+			}
+		});
+	});
+</script>
+<title>Insert title here</title>
+</head>
+<body>
+	<form th:action="@{/turmas/salvar}" th:object="${turma}"
+	method="post" >
+	
+	<div th:replace="fragment/mensagens"></div>
+	
+	<input type="hidden" th:field="${turma.id}">
+		<table>
+				<tr>
+					<td>Nome da Turma:</td>
+					<td><input type="text" th:field="${turma.nome}"> 
+					</td>
+				</tr>
+				<tr>
+					<td>Data:</td>
+					<td><input type="text" th:field="${turma.data}"></td>
+				</tr>
+				<tr>
+					<td>Estudante:</td>
+					<td>
+						<input id="estudante" th:field="${turma.tipoEstudante.nome}" /> 
+						<input id="idEstudante" type="hidden"
+						th:field="${turma.tipoEstudante.id}" />
+						
+						<input type="submit" value="Adicionar"
+							formaction="/turmas/addEstudante"
+								formmethod="post"/>
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<input type="submit"
+						th:value="${turma.id} == 0 ? Cadastrar : Editar"> <input
+						type="submit" value="Cancelar" formaction="/" formmethod="get">
+					</td>
+				</tr>
+				</table>
+				<div th:if="${turma.estudante} != null and
+					${!turma.estudante.empty}">
+					<table>
+						<caption>Estudantes</caption>
+						<tr>
+							<th>Nome:</th>
+							<th></th>
+						</tr>
+						<tr th:each:="f : ${turma.estudante}">
+							<td th:text="${f.nome}"></td>
+							<td>
+								<input type="submit" value="Remover"
+									th:formaction="@{/usuarios/removerEstudante} + ${f.id}"
+									formmethod="post">
+							</td>
+						</tr>
+					</table>
+					<input type="hidden"
+						th:each="f, itemStat : ${turma.estudante}"
+							th:field="${turma.estudante[__${itemStat.index}__].id}"/>
+							
+					<input type="hidden"
+						th:each="f, itemStat : ${turma.estudante}"
+							th:field="${turma.estudante[__${itemStat.index}__].nome}"/>
+				</div>
+	</form>
+</body>
+</html>
