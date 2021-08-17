@@ -66,11 +66,11 @@
 							<th>Nome:</th>
 							<th></th>
 						</tr>
-						<tr th:each:="f : ${turma.estudante}">
+						<tr th:each="f : ${turma.estudante}">
 							<td th:text="${f.nome}"></td>
 							<td>
 								<input type="submit" value="Remover"
-									th:formaction="@{/usuarios/removerEstudante} + ${f.id}"
+									th:formaction="@{/turmas/removerEstudante/} + ${f.id}"
 									formmethod="post">
 							</td>
 						</tr>

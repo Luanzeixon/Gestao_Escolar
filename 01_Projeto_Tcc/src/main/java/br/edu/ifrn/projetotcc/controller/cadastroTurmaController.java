@@ -68,11 +68,14 @@ public class cadastroTurmaController {
 			turma.setEstudante(new ArrayList<>());
 		}
 		turma.getEstudante().add(turma.getTipoEstudante());
+		
 		return "turma/cadastroTurma"; 
 	}
 	
 	@PostMapping("/removerEstudante/{id}")
-	public String removerEstudante(Turma turma, ModelMap model, @PathVariable("id") Integer idEstudante) {
+	public String removerEstudante(@PathVariable("id") Integer idEstudante,
+			Turma turma, 
+			ModelMap model ) {
 		
 		Usuario estudante = new Usuario();
 		

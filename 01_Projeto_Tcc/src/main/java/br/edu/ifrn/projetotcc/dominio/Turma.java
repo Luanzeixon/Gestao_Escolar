@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
@@ -24,7 +25,7 @@ public class Turma {
 	@Column
 	private String data;
 	
-	@OneToMany()
+	@ManyToMany
 	private List<Usuario> estudante;
 	
 	@Transient
