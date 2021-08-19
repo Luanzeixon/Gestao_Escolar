@@ -35,7 +35,7 @@ public class inicioCotroller {
         }if(usuario.getTipo().equals("SECRETARIO") || usuario.getTipo().equals("ADM") ) {
         	return "usuario/paginaSecretario";
         }else{
-        	return "PaginaErro";
+        	return "inicio";
         }
 	}
 	

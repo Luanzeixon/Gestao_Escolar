@@ -52,6 +52,12 @@
 				<th>Opções</th>
 			</tr>
 			<tr th:each="u : ${usuariosEncontrados}">
+			<td>
+						<img th:if="${u.foto != null}" 
+						th:src="@{/download/} + ${u.foto.id} + '?salvar=false'"
+						style="height: 128px; max-width: 128px">
+						
+					</td>
 				<td th:text="${u.tipo}"></td>
 				<td th:text="${u.nome}"></td>
 				<td th:text="${u.email}"></td>

@@ -1,10 +1,15 @@
 package br.edu.ifrn.projetotcc.dominio;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+import br.edu.ifrn.projetotcc.dominio.Arquivo;
 
 @Entity
 public class Usuario {
@@ -18,6 +23,9 @@ private String matricula;
 
 @Column
 private String tipo;
+
+@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+private Arquivo foto;
 
 @Column
 private String nome;
@@ -51,6 +59,14 @@ public boolean equals(Object obj) {
 	if (id != other.id)
 		return false;
 	return true;
+}
+
+public Arquivo getFoto() {
+	return foto;
+}
+
+public void setFoto(Arquivo foto) {
+	this.foto = foto;
 }
 
 public int getId() {

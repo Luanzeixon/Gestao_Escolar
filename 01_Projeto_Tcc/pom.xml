@@ -6,13 +6,13 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.5.3</version>
+		<version>2.4.5</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>br.edu.ifrn.projetotcc</groupId>
-	<artifactId>01_Projeto_Tcc</artifactId>
+	<groupId>br.edu.ifrn.crud</groupId>
+	<artifactId>02_CRUD</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>01_Projeto_Tcc</name>
+	<name>02_CRUD</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
@@ -22,6 +22,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -43,6 +44,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
 		<!-- Pra usar o bean validation precisa dessa depedencia -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -59,7 +61,7 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-
+		
 		<!-- Templates -->
 		<dependency>
 			<groupId>nz.net.ultraq.thymeleaf</groupId>
@@ -77,6 +79,7 @@
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
 		</dependency>
+		
 	</dependencies>
 	<build>
 		<plugins>

@@ -6,7 +6,7 @@
 </head>
 <body>
 	<form th:action="@{/usuarios/salvarEstudante}" th:object="${usuario}"
-	method="post" >
+	method="post" enctype="multipart/form-data" >
 	
 	<div th:replace="fragment/mensagens"></div>
 	
@@ -37,6 +37,11 @@
 					<td>Senha:</td>
 					<td><input type="password" th:field="${usuario.senha}">
 					</td>
+				</tr>
+				<tr>
+					<td>Foto:</td>
+					<td><input type="file" th:name="file"> <!-- Foto do usuario se mander quando cadastrar(nao se perder) -->
+						<input type="hidden" th:field="${usuario.foto.id}"></td>
 				</tr>
 				<tr>
 					<td></td>
