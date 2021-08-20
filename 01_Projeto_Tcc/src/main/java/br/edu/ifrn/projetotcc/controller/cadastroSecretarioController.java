@@ -28,6 +28,7 @@ public class cadastroSecretarioController {
 		model.addAttribute("usuario", new Usuario());
 		return "usuario/cadastroSecretario";
 	}
+	
 
 	@PostMapping("/salvarSecretario")
 	@Transactional(readOnly = false)

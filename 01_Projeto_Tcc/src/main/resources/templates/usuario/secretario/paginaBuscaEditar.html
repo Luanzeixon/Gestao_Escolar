@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt" layout:decorate="~{layout}">
+<html lang="pt" layout:decorate="~{layoutADM}">
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE-edge" />
@@ -10,19 +10,7 @@
 <body>	
 	
 	<section layout:fragment="corpo">
-			<h1>Cadastro</h1>
-	<a href="/usuarios/cadastroEstudante">Cadastro Estudante</a>
-	<br>
-	<a href="/usuarios/cadastroProfessor">Cadastro Professor</a>
-	<br>
-	<a href="/usuarios/cadastroSecretario">Cadastro Secretario</a>
-	<br>
-	<a href="/usuarios/cadastroParente">Cadastro Parente</a>
-	<br>
-	<br>
-	<a href="/disciplinas/cadastroDisciplina">Cadastro Disciplina</a>
-	<br>
-	<a href="/turmas/cadastroTurma">Cadastro Turmas</a>
+			<h1>Busca</h1>
 	<br>
 	<a href="/usuarios/busca">Buscar Usuarios</a>
 	<br>
@@ -30,6 +18,9 @@
 	<br>
 	<a href="/turmas/buscaTurma">Buscar Turmas</a>
 	<br>
+	<form th:action="@{/logout}" name="logoutForm" method="post">
+		<input type="submit" value="Sair"> <br>
+	</form>
 		</section>	
 	
 </body>

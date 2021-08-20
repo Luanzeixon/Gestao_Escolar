@@ -17,15 +17,20 @@ public class inicioCotroller {
 	private UsuarioRepository usuarioRepository;
 
 	@GetMapping("/")
-	public String inicio() {
+	public String inicio(ModelMap model){
 		
 		//BUSCANDO DADOS DO USUARIO LOGADO
 		Authentication authentication =
                 SecurityContextHolder.getContext().getAuthentication();
-       
+		boolean foto = true;
         String email = authentication.getName();
         Usuario usuario = usuarioRepository.findByEmail(email).get();
+        model.addAttribute("usuario", usuario);
+        model.addAttribute("foto", foto);
         
+        if(usuario.getFoto() == null ) {
+        	foto = false;
+        }
         if(usuario.getTipo().equals("ESTUDANTE")) {
         	return "usuario/paginaEstudante";
         }if(usuario.getTipo().equals("PROFESSOR")) {
