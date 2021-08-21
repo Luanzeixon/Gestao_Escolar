@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt" layout:decorate="~{layout}">
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
 <body>
+<section layout:fragment="corpo">
 	<form th:action="@{/usuarios/salvarParente}" th:object="${usuario}"
-		method="post">
+		method="post" enctype="multipart/form-data">
 
 		<div th:replace="fragment/mensagens"></div>
 
@@ -37,7 +38,11 @@
 				<td><input type="password" th:field="${usuario.senha}">
 				</td>
 			</tr>
-			
+			<tr>
+					<td>Foto:</td>
+					<td><input type="file" th:name="file"> 
+						<input type="hidden" th:field="${usuario.foto.id}"></td>
+				</tr>
 			
 			<tr>
 				<td></td>
@@ -47,6 +52,6 @@
 				</td>
 			</tr>
 			</form>
-
+</section>
 </body>
 </html>

@@ -1,30 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt" layout:decorate="~{layout2}">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
+<section layout:fragment="corpo">
+<style>
+.btn-primary {
+	display: inline-block;
+	background-color: #000;
+	background-image: linear-gradient(125deg, #3ce7d9, #064497);
+	color: #fff;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-size: 16px;
+	padding: 8px 16px;
+	border: none;
+	width: 200px;
+	cursor: pointer;
+}
+
+</style>
 	<div th:replace="fragment/mensagens"></div>
 	<form th:action="@{/disciplinas/buscar}" method="get">
+	<h3>Buscar Disciplina</h3>
 		<table>
 			<tr>
-				<td>Nome:</td>
-				<td><input type="text" th:name="nome"></td>
+				<td>Nome Turma:</td>
+				<td><input class="form-control" type="text" th:name="nome"></td>
 			</tr>
 			<tr>
 				<td></td>
-				<td><input type="submit" value="buscar" /> <input
-					type="submit" value="cancelar" formaction="/" formmethod="get" />
+				<td><input class="btn btn-primary" type="submit" value="buscar" /> <input
+					class="btn btn-primary" type="submit" value="voltar" formaction="/" formmethod="get" />
 				</td>
-			</tr>
-				
+			</tr>			
 		</table>
+		<hr>
 	</form>
 	<br/>
-	<div th:if="${not #lists.isEmpty(disciplinasEncontradas)}">
-		<table>
-			<tr>
+	<div th:if="${not #lists.isEmpty(disciplinasEncontradas)}" 
+	class="table-wrapper-scroll-y my-custom-scrollbar">
+		<table class="table table-bordered table-striped mb-0">
+			<tr style="color: white; background-image: linear-gradient(125deg, #3ce7d9, #064497);">
 				<th>Nome</th>
 				<th>Carga Horaria</th>
 				<th>Opções</th>
@@ -32,13 +51,14 @@
 			<tr th:each="d : ${disciplinasEncontradas}">
 				<td th:text="${d.nome}"></td>
 				<td th:text="${d.carga_horaria}"></td>
-				<td><a th:href="'/disciplinas/editar/' + ${d.id}"> Editar </a> <a
+				<td><a th:href="'/disciplinas/editar/' + ${d.id}">  <i
+							class='bx bx-edit'></i></a> <a
 					th:href="'/disciplinas/remover/' + ${d.id}"
-					onclick="if(!confirm('Deseja realmente remover a Disciplina?')) return false; ">
-						Remover </a>
-						</td>
+					onclick="if(!confirm('Deseja realmente remover a Turma?')) return false; ">
+						<i class='bx bx-trash'></i> </a></td>
 			</tr>
 		</table>
 	</div>
+</section>
 </body>
 </html>

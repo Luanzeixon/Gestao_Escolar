@@ -254,12 +254,9 @@ linkColor.forEach(l=> l.addEventListener('click', colorLink))
             <div class="header_toggle"> 
             	<i class='bx bx-menu' id="header-toggle"></i> 
             </div>
-            <p th:text="${usuario.nome}"></p>
-            <div class="header_img" th:if="${usuario.foto == null}" > 
+           
+            <div class="header_img"  > 
             	<img th:src="@{https://images.pexels.com/photos/3418400/pexels-photo-3418400.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940}" alt=""> 
-            </div>
-            <div class="header_img" th:if="${usuario.foto != null}" > 
-            	<img th:src="@{/download/} + ${usuario.foto.id} + '?salvar=false'" alt=""> 
             </div>
             
         </header>
@@ -271,18 +268,13 @@ linkColor.forEach(l=> l.addEventListener('click', colorLink))
                         <a href="#" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Dados</span> </a> 
                         <a href="#" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Turmas</span> </a> 
                         <a href="#" class="nav_link"> <i class='bx bx-folder nav_icon'></i> <span class="nav_name">Documentos</span> </a> 
-                        <a href="#" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Calendario</span> </a>  
-                        <a href="#" class="nav_link" th:if="${usuario.tipo != 'SECRETARIO'}"> <i class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">Boletins</span> </a> 
-                        <a href="#" class="nav_link" th:if="${usuario.tipo == 'SECRETARIO'}"> <i class='bx bx-search nav_icon'></i> <span class="nav_name">Cadastrar</span> </a> 
-                        <a href="#" class="nav_link" th:if="${usuario.tipo == 'SECRETARIO'}"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Pesquisar</span> </a> 
+                        <a href="#" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Calendario</span> </a>
+                        <a href="#" class="nav_link" > <i class='bx bx-search nav_icon'></i> <span class="nav_name">Cadastrar</span> </a> 
+                        <a href="#" class="nav_link" > <i class='bx bx-user nav_icon'></i> <span class="nav_name">Pesquisar</span> </a> 
                         </div>    
                     </div>
-                    <form th:action="@{/logout}" name="logoutForm" method="post" id="logoutForm">
-                    	<a href="#" onclick="get_form(this).submit(); return false" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span id="span-id" class="nav_name">Sair</span></a>
-                     	<br>
-                	</form> 
                 </div>
-                
+
             </nav>
         </div>
         <div >

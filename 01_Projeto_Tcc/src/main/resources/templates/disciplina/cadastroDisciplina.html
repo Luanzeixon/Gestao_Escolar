@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt" layout:decorate="~{layout2}">
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
 <body>
+<section layout:fragment="corpo">
 	<form th:action="@{/disciplinas/salvarDisciplina}" th:object="${disciplina}"
 	method="post" >
 	
@@ -41,5 +42,7 @@
 					</td>
 				</tr>
 	</form>
+</section>
+	
 </body>
 </html>

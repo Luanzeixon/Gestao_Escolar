@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt" layout:decorate="~{layout}">
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
 <body>
-<form th:action="@{/usuarios/salvarProfessor}" th:object="${usuario}"
+<section layout:fragment="corpo">
+	<form th:action="@{/usuarios/salvarProfessor}" th:object="${usuario}"
 	method="post" enctype="multipart/form-data" >
 	
 	<div th:replace="fragment/mensagens"></div>
@@ -52,5 +53,6 @@
 					</td>
 				</tr>
 	</form>
+</section>
 </body>
 </html>

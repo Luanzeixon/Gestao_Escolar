@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt" layout:decorate="~{layout2}">
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -21,6 +21,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<section layout:fragment="corpo">
 	<form th:action="@{/turmas/salvar}" th:object="${turma}"
 	method="post" >
 	
@@ -84,5 +85,7 @@
 							th:field="${turma.estudante[__${itemStat.index}__].nome}"/>
 				</div>
 	</form>
+</section>
+	
 </body>
 </html>

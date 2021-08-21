@@ -1,75 +1,103 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt" layout:decorate="~{layout2}">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	<div th:replace="fragment/mensagens"></div>
-	<form th:action="@{/usuarios/buscar}" method="get">
-		<table>
-			<tr>
-				<td>Nome:</td>
-				<td><input type="text" th:name="nome"></td>
-			</tr>
-			<tr>
-				<td>Email:</td>
-				<td><input type="email" th:name="email"></td>
-			</tr>
-			<tr>
-					<td colspan="2"><input type="checkbox"
-						th:name="mostrarTodosDados" th:value="true" /> Mostrar todos os
-						dados dos usuários</td>
+	<section layout:fragment="corpo">
+		<style>
+.btn-primary {
+	display: inline-block;
+	background-color: #000;
+	background-image: linear-gradient(125deg, #064497, #3ce7d9);
+	color: #fff;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-size: 16px;
+	padding: 8px 16px;
+	border: none;
+	width: 200px;
+	cursor: pointer;
+}
+</style>
+		<div th:replace="fragment/mensagens"></div>
+		<div>
+			<h3>Buscar Usuário</h3>
+			<form th:action="@{/usuarios/buscar}" method="get">
+				<table>
+					<tr>
+						<td>Nome:</td>
+						<td><input class="form-control" type="text" th:name="nome"></td>
+					</tr>
+					<tr>
+						<td>Email:</td>
+						<td><input class="form-control" type="email" th:name="email"></td>
+					</tr>
+					<tr>
+						<td colspan="2"><input class="form-check-input"
+							type="checkbox" th:name="mostrarTodosDados" th:value="true" />
+							Mostrar todos os dados dos usuários</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><input class="btn btn-primary" type="submit"
+							value="buscar" /> <input class="btn btn-primary" type="submit"
+							value="voltar" formaction="/" formmethod="get" /></td>
+					</tr>
+
+				</table>
+			</form>
+		</div>
+		<br />
+		<form th:action="@{/usuarios/filtrar}" th:method="post">
+			<hr>
+			<select th:name="tipo" class="form-select"
+				aria-label="Default select example">
+				<option th:value="ESTUDANTE">Estudande</option>
+				<option th:value="PARENTE">Parente</option>
+				<option th:value="PROFESSOR">Professor</option>
+				<option th:value="SECRETARIO">Secretario</option>
+			</select> <br> <input class="btn btn-primary" type="submit"
+				value="filtrar">
+			<hr>
+		</form>
+		<div th:if="${not #lists.isEmpty(usuariosEncontrados)}"
+			class="table-wrapper-scroll-y my-custom-scrollbar">
+			<table class="table table-bordered table-striped mb-0">
+				<tr
+					style="color: white; background-image: linear-gradient(125deg, #064497, #3ce7d9);">
+					<th>Foto</th>
+					<th>Tipo usuario</th>
+					<th>Nome</th>
+					<th>Email</th>
+					<th th:if="${mostrarTodosDados} == true">Matricula</th>
+					<th th:if="${mostrarTodosDados} == true">CPF</th>
+					<th>Opções</th>
 				</tr>
-			<tr>
-				<td></td>
-				<td><input type="submit" value="buscar" /> <input
-					type="submit" value="cancelar" formaction="/" formmethod="get" />
-				</td>
-			</tr>
-				
-		</table>
-	</form>
-	<br/>
-	<form th:action="@{/usuarios/filtrar}" th:method="post">
-		<select th:name="tipo">
-					<option th:value="ESTUDANTE">Estudande</option>
-					<option th:value="PARENTE">Parente</option>
-					<option th:value="PROFESSOR">Professor</option>
-					<option th:value="SECRETARIO">Secretario</option>
-				</select> 
-				<input type="submit" value="filtrar">
-	</form>
-
-	<div th:if="${not #lists.isEmpty(usuariosEncontrados)}">
-		<table>
-			<tr>
-				<th>Tipo usuario</th>
-				<th>Nome</th>
-				<th>Email</th>
-				<th th:if="${mostrarTodosDados} == true">Matricula</th>
-				<th th:if="${mostrarTodosDados} == true">CPF</th>
-				<th>Opções</th>
-			</tr>
-			<tr th:each="u : ${usuariosEncontrados}">
-			<td>
-						<img th:if="${u.foto != null}" 
+				<tr th:each="u : ${usuariosEncontrados}">
+					<td><img th:if="${u.foto != null}"
 						th:src="@{/download/} + ${u.foto.id} + '?salvar=false'"
-						style="height: 128px; max-width: 128px">
-						
-					</td>
-				<td th:text="${u.tipo}"></td>
-				<td th:text="${u.nome}"></td>
-				<td th:text="${u.email}"></td>
-				<td th:text="${u.matricula}" th:if="${mostrarTodosDados} == true"></td>
-				<td th:text="${u.cpf}" th:if="${mostrarTodosDados} == true"></td>
+						style="height: 128px; max-width: 128px"> <img
+						th:if="${u.foto == null}"
+						th:src="@{https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png}"
+						style="height: 128px; max-width: 128px"></td>
+					<td th:text="${u.tipo}"></td>
+					<td th:text="${u.nome}"></td>
+					<td th:text="${u.email}"></td>
+					<td th:text="${u.matricula}" th:if="${mostrarTodosDados} == true"></td>
+					<td th:text="${u.cpf}" th:if="${mostrarTodosDados} == true"></td>
 
-				<td><a th:href="'/usuarios/editar/' + ${u.id}"> Editar </a> <a
-					th:href="'/usuarios/remover/' + ${u.id}"
-					onclick="if(!confirm('Deseja realmente remover o usuário?')) return false; ">
-						Remover </a></td>
-			</tr>
-		</table>
-	</div>
+					<td><a th:href="'/usuarios/editar/' + ${u.id}"> <i
+							class='bx bx-edit'></i>
+					</a> <a th:href="'/usuarios/remover/' + ${u.id}"
+						onclick="if(!confirm('Deseja realmente remover o usuário?')) return false; ">
+							<i class='bx bx-trash'></i>
+					</a></td>
+				</tr>
+			</table>
+		</div>
+	</section>
+
 </body>
 </html>

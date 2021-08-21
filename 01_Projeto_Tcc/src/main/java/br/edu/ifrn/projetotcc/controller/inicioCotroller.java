@@ -18,10 +18,10 @@ public class inicioCotroller {
 
 	@GetMapping("/")
 	public String inicio(ModelMap model){
-		
 		//BUSCANDO DADOS DO USUARIO LOGADO
 		Authentication authentication =
                 SecurityContextHolder.getContext().getAuthentication();
+		
 		
         String email = authentication.getName();
         Usuario usuario = usuarioRepository.findByEmail(email).get();
