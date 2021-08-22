@@ -22,10 +22,10 @@
 }
 </style>
 		<div th:replace="fragment/mensagens"></div>
-		<div>
+		<div  class="">
 			<h3>Buscar Usuário</h3>
 			<form th:action="@{/usuarios/buscar}" method="get">
-				<table>
+				<table >
 					<tr>
 						<td>Nome:</td>
 						<td><input class="form-control" type="text" th:name="nome"></td>

@@ -50,5 +50,18 @@ public class inicioCotroller {
 		model.addAttribute("msgErro", "Login ou senha incorretos, tente novamente");
 		return "login";
 	}
-
+	
+	@GetMapping("/cadastros")
+		public String cadastros() {
+			return "usuario/secretario/paginaCadastro";
+		
+	}
+	@GetMapping("/buscas")
+	public String buscas() {
+		return "usuario/secretario/paginaBuscaEditar";
+	}
+	@GetMapping("/calendario")
+	public String calendario() {
+		return "calendario";
+	}
 }

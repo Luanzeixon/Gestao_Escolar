@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt" layout:decorate="~{layoutADM}">
+<html lang="pt" layout:decorate="~{layout2}">
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE-edge" />
@@ -11,16 +11,13 @@
 	
 	<section layout:fragment="corpo">
 			<h1>Busca</h1>
-	<br>
 	<a href="/usuarios/busca">Buscar Usuarios</a>
 	<br>
 	<a href="/disciplinas/buscaDisciplina">Buscar Disciplinas</a>
 	<br>
 	<a href="/turmas/buscaTurma">Buscar Turmas</a>
 	<br>
-	<form th:action="@{/logout}" name="logoutForm" method="post">
-		<input type="submit" value="Sair"> <br>
-	</form>
+	
 		</section>	
 	
 </body>
