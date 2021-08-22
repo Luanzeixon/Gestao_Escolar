@@ -2,7 +2,8 @@
 <html lang="pt" layout:decorate="~{layout2}">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
@@ -11,8 +12,8 @@
 			source : "/turmas/autocompleteEstudante",
 			minLengh : 1,
 			select : function(event, ui) {
-				this.value = ui.item.label; 
-				$("#idEstudante").val(ui.item.value); 
+				this.value = ui.item.label;
+				$("#idEstudante").val(ui.item.value);
 				return false;
 			}
 		});
@@ -21,71 +22,161 @@
 <title>Insert title here</title>
 </head>
 <body>
-<section layout:fragment="corpo">
-	<form th:action="@{/turmas/salvar}" th:object="${turma}"
-	method="post" >
 	
-	<div th:replace="fragment/mensagens"></div>
-	
-	<input type="hidden" th:field="${turma.id}">
-		<table>
-				<tr>
-					<td>Nome da Turma:</td>
-					<td><input type="text" th:field="${turma.nome}"> 
-					</td>
-				</tr>
-				<tr>
-					<td>Data:</td>
-					<td><input type="text" th:field="${turma.data}"></td>
-				</tr>
-				<tr>
-					<td>Estudante:</td>
-					<td>
-						<input id="estudante" th:field="${turma.tipoEstudante.nome}" /> 
-						<input id="idEstudante" type="hidden"
-						th:field="${turma.tipoEstudante.id}" />
-						
-						<input type="submit" value="Adicionar"
-							formaction="/turmas/addEstudante"
-								formmethod="post"/>
-					</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td>
-						<input type="submit"
-						th:value="${turma.id} == 0 ? Cadastrar : Editar"> <input
-						type="submit" value="Cancelar" formaction="/" formmethod="get">
-					</td>
-				</tr>
-				</table>
-				<div th:if="${turma.estudante} != null and
+	<section layout:fragment="corpo">
+		<style>
+body {
+	color: #000;
+	overflow-x: hidden;
+	height: 100%;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+
+.card {
+	padding: 30px 40px;
+	margin-bottom: 60px;
+	border: none !important;
+	box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.2)
+}
+
+.blue-text {
+	color: #00BCD4
+}
+
+.form-control-label {
+	margin-bottom: 0
+}
+
+input, textarea, button {
+	padding: 8px 15px;
+	border-radius: 5px !important;
+	margin: 5px 0px;
+	box-sizing: border-box;
+	border: 1px solid #ccc;
+	font-size: 18px !important;
+	font-weight: 300
+}
+
+input:focus, textarea:focus {
+	-moz-box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+	border: 1px solid #00BCD4;
+	outline-width: 0;
+	font-weight: 400
+}
+
+.btn-block {
+	text-transform: uppercase;
+	font-size: 15px !important;
+	font-weight: 400;
+	height: 43px;
+	cursor: pointer
+}
+
+.btn-block:hover {
+	color: #fff !important
+}
+
+button:focus {
+	-moz-box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+	outline-width: 0
+}
+
+.btn-primary {
+	display: inline-block;
+	background-color: #000;
+	background-image: linear-gradient(125deg, #064497, #3ce7d9);
+	color: #fff;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-size: 16px;
+	padding: 8px 16px;
+	border: none;
+	width: 200px;
+	cursor: pointer;
+}
+</style>
+		<div class="container-fluid px-1 py-5 mx-auto">
+			<div class="row d-flex justify-content-center">
+				<div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
+
+					<input type="hidden" th:field="${turma.id}">
+
+					<div class="card">
+
+						<h5 class="text-center mb-4">Cadastro Turma</h5>
+
+						<form class="form-card" th:action="@{/turmas/salvar}"
+							th:object="${turma}" method="post" enctype="multipart/form-data">
+
+							<div th:replace="fragment/mensagens"></div>
+							<div class="row justify-content-between text-left">
+
+								<div class="form-group col-sm-6 flex-column d-flex">
+									<label class="form-control-label px-3">Nome<span
+										class="text-danger"> *</span></label> <input th:field="${turma.nome}"
+										type="text" id="fname" name="fname"
+										placeholder="Nome da Turma">
+								</div>
+
+								<div class="form-group col-sm-6 flex-column d-flex">
+									<label class="form-control-label px-3">Data<span
+										class="text-danger"> *</span></label> <input th:field="${turma.data}"
+										type="email" id="lname" name="lname"
+										placeholder="Ano da turma">
+								</div>
+
+							</div>
+							<div class="row justify-content-between text-left">
+								<div class="form-group col-12 flex-column d-flex">
+									<label class="form-label" for="customFile">Estudante</label><input
+										id="estudante" th:field="${turma.tipoEstudante.nome}" /> <input
+										id="idEstudante" type="hidden"
+										th:field="${turma.tipoEstudante.id}" /> <input type="submit"
+										value="Adicionar" formaction="/turmas/addEstudante"
+										formmethod="post" />
+								</div>
+							</div>
+							<div
+								th:if="${turma.estudante} != null and
 					${!turma.estudante.empty}">
-					<table>
-						<caption>Estudantes</caption>
-						<tr>
-							<th>Nome:</th>
-							<th></th>
-						</tr>
-						<tr th:each="f : ${turma.estudante}">
-							<td th:text="${f.nome}"></td>
-							<td>
-								<input type="submit" value="Remover"
-									th:formaction="@{/turmas/removerEstudante/} + ${f.id}"
-									formmethod="post">
-							</td>
-						</tr>
-					</table>
-					<input type="hidden"
-						th:each="f, itemStat : ${turma.estudante}"
-							th:field="${turma.estudante[__${itemStat.index}__].id}"/>
-							
-					<input type="hidden"
-						th:each="f, itemStat : ${turma.estudante}"
-							th:field="${turma.estudante[__${itemStat.index}__].nome}"/>
+								<table>
+									<caption>Estudantes</caption>
+									<tr>
+										<th>Nome:</th>
+										<th></th>
+									</tr>
+									<tr th:each="f : ${turma.estudante}">
+										<td th:text="${f.nome}"></td>
+										<td><input type="submit" value="Remover"
+											th:formaction="@{/turmas/removerEstudante/} + ${f.id}"
+											formmethod="post"></td>
+									</tr>
+								</table>
+								<input type="hidden" th:each="f, itemStat : ${turma.estudante}"
+									th:field="${turma.estudante[__${itemStat.index}__].id}" /> <input
+									type="hidden" th:each="f, itemStat : ${turma.estudante}"
+									th:field="${turma.estudante[__${itemStat.index}__].nome}" />
+							</div>
+
+							<div class="row justify-content-end">
+								<div class="form-group col-sm-12">
+									<input class="btn btn-primary" type="submit"
+										th:value="${turma.id} == 0 ? Cadastrar : Editar"> <input
+										class="btn btn-primary" type="submit" value="Cancelar"
+										formaction="/" formmethod="get">
+								</div>
+							</div>
+
+						</form>
+					</div>
 				</div>
-	</form>
-</section>
-	
+			</div>
+		</div>
+	</section>
 </body>
 </html>
