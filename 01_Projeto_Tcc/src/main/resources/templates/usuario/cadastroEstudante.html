@@ -13,6 +13,7 @@ body {
 	height: 100%;
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
+	background-image: linear-gradient(125deg, #3ce7d9, #064497);
 }
 
 .card {
@@ -90,7 +91,7 @@ button:focus {
 
 					<div class="card">
 
-						<h5 class="text-center mb-4">Cadastro Estudante</h5>
+						<h3 class="text-center mb-4">Cadastro Estudante</h3>
 
 						<form class="form-card" th:action="@{/usuarios/salvarEstudante}"
 							th:object="${usuario}" method="post"

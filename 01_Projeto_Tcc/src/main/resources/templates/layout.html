@@ -273,14 +273,15 @@ linkColor.forEach(l=> l.addEventListener('click', colorLink))
                         <a href="#" class="nav_link"> <i class='bx bx-folder nav_icon'></i> <span class="nav_name">Documentos</span> </a> 
                         <a href="/calendario" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Calendario</span> </a>  
                         <a href="#" class="nav_link" th:if="${usuario.tipo != 'SECRETARIO'}"> <i class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">Boletins</span> </a> 
-                        <a href="/cadastros" class="nav_link" th:if="${usuario.tipo == 'SECRETARIO'}"> <i class='bx bx-search nav_icon'></i> <span class="nav_name">Cadastrar</span> </a> 
-                        <a href="/buscas" class="nav_link" th:if="${usuario.tipo == 'SECRETARIO'}"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Pesquisar</span> </a> 
-                        </div>    
-                    </div>
-                    <form th:action="@{/logout}" name="logoutForm" method="post" id="logoutForm">
+                        <a href="/cadastros" class="nav_link" th:if="${usuario.tipo == 'SECRETARIO'}"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Cadastrar</span> </a> 
+                        <a href="/buscas" class="nav_link" th:if="${usuario.tipo == 'SECRETARIO'}"> <i class='bx bx-search  nav_icon'></i> <span class="nav_name">Buscar/Editar</span> </a> 
+                        <form th:action="@{/logout}" name="logoutForm" method="post" id="logoutForm">
                     	<a href="#" onclick="get_form(this).submit(); return false" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span id="span-id" class="nav_name">Sair</span></a>
                      	<br>
                 	</form> 
+                        </div>    
+                    </div>
+                    
                 </div>
                 
             </nav>
