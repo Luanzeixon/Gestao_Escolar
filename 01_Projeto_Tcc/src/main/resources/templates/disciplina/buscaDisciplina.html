@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt" layout:decorate="~{layout}">
+<html lang="pt" layout:decorate="~{layout2}">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -24,6 +24,7 @@
 </style>
 	<div th:replace="fragment/mensagens"></div>
 	<form th:action="@{/disciplinas/buscar}" method="get">
+		<input type="hidden" th:field="${disciplina.id}">
 	<h3>Buscar Disciplina</h3>
 		<table>
 			<tr>

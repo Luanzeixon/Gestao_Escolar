@@ -1,6 +1,8 @@
 package br.edu.ifrn.projetotcc.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.edu.ifrn.projetotcc.dominio.Arquivo;
+import br.edu.ifrn.projetotcc.dominio.Disciplina;
 import br.edu.ifrn.projetotcc.dominio.Usuario;
 import br.edu.ifrn.projetotcc.repository.ArquivoRepository;
 import br.edu.ifrn.projetotcc.repository.UsuarioRepository;
@@ -42,9 +45,14 @@ public class cadastroSecretarioController {
 	@PostMapping("/salvarSecretario")
 	@Transactional(readOnly = false)
 	public String salvarCadastroSecretario(Usuario usuario, RedirectAttributes attr, 
-			@RequestParam("file") MultipartFile arquivo) {
+			@RequestParam("file") MultipartFile arquivo, ModelMap model) {
 		try {
-
+			
+			List<String> validacao = validarDados(usuario);
+			if(!validacao.isEmpty()) {
+				model.addAttribute("msgsErro",validacao);
+				return "/disciplina/cadastroDisciplina";
+			}
 			if (arquivo != null && !arquivo.isEmpty()) {
 				
 				String nomeArquivo = StringUtils.cleanPath(arquivo.getOriginalFilename());
@@ -62,15 +70,14 @@ public class cadastroSecretarioController {
 				
 				usuario.setFoto(null);
 			}
-			
-			String senhaCriptografada = new BCryptPasswordEncoder().encode(usuario.getSenha());
-			usuario.setSenha(senhaCriptografada);
+				String senhaCriptografada = new BCryptPasswordEncoder().encode(usuario.getSenha());
+				usuario.setSenha(senhaCriptografada);
 
-			usuario.setTipo("SECRETARIO");
+				usuario.setTipo("SECRETARIO");
 
-			usuarioRepository.save(usuario);
+				usuarioRepository.save(usuario);
 
-			attr.addFlashAttribute("msgSucesso", "Secretario inserido com sucesso");
+				attr.addFlashAttribute("msgSucesso", "Secretario inserido com sucesso");
 			
 
 		} catch (IOException e) {
@@ -79,6 +86,22 @@ public class cadastroSecretarioController {
 		}
 
 		return "redirect:/usuarios/cadastroSecretario";
+	}
+	
+	private List<String> validarDados(Usuario usuario){
+		List<String> msgs = new ArrayList<>();
+		if(usuario.getNome() == null || usuario.getNome().isEmpty()) {
+			msgs.add("Campo nome é obrigatorio!");
+		}if(usuario.getCpf() == null || usuario.getCpf().isEmpty()) {
+			msgs.add("CPF inavalido!");
+		}
+		if(usuario.getEmail() == null || usuario.getEmail().isEmpty()) {
+			msgs.add("Email é obrigatorio!");
+		}
+		if(usuario.getSenha() == null || usuario.getSenha().isEmpty()) {
+			msgs.add("A senha não pode ser nula!");
+		}
+		return msgs;
 	}
 	
 	

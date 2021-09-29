@@ -1,6 +1,8 @@
 package br.edu.ifrn.projetotcc.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -42,10 +44,14 @@ public class cadastroParenteController {
 	@PostMapping("/salvarParente")
 	@Transactional(readOnly = false)
 	public String salvarCadastroParente(Usuario usuario, RedirectAttributes attr,
-			@RequestParam("file") MultipartFile arquivo) {
+			@RequestParam("file") MultipartFile arquivo, ModelMap model) {
 
 		try {
-
+			List<String> validacao = validarDados(usuario);
+			if(!validacao.isEmpty()) {
+				model.addAttribute("msgsErro",validacao);
+				return "/disciplina/cadastroParente";
+			}
 			if (arquivo != null && !arquivo.isEmpty()) {
 				
 				String nomeArquivo = StringUtils.cleanPath(arquivo.getOriginalFilename());
@@ -81,6 +87,21 @@ public class cadastroParenteController {
 
 		return "redirect:/usuarios/cadastroParente";
 		
+	}
+	private List<String> validarDados(Usuario usuario){
+		List<String> msgs = new ArrayList<>();
+		if(usuario.getNome() == null || usuario.getNome().isEmpty()) {
+			msgs.add("Campo nome é obrigatorio!");
+		}if(usuario.getCpf() == null || usuario.getCpf().isEmpty()) {
+			msgs.add("CPF inavalido!");
+		}
+		if(usuario.getEmail() == null || usuario.getEmail().isEmpty()) {
+			msgs.add("Email é obrigatorio!");
+		}
+		if(usuario.getSenha() == null || usuario.getSenha().isEmpty()) {
+			msgs.add("A senha não pode ser nula!");
+		}
+		return msgs;
 	}
 	
 	

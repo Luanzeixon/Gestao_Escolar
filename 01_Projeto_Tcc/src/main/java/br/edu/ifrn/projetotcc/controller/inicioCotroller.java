@@ -58,6 +58,11 @@ public class inicioCotroller {
 		model.addAttribute("usuario", retornarUsuario());
 		return "usuario/dadosUsuario";
 	}
+	@GetMapping("/documentos")
+	public String doc(ModelMap model) {
+		model.addAttribute("usuario", retornarUsuario());
+		return "documentos";
+	}
 	public Usuario retornarUsuario() {
 		// BUSCANDO DADOS DO USUARIO LOGADO
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -65,4 +70,5 @@ public class inicioCotroller {
 		Usuario usuario = usuarioRepository.findByEmail(email).get();
 		return usuario;
 	}
+	
 }
