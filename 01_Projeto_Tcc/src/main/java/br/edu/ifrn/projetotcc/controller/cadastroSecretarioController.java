@@ -50,8 +50,8 @@ public class cadastroSecretarioController {
 			
 			List<String> validacao = validarDados(usuario);
 			if(!validacao.isEmpty()) {
-				model.addAttribute("msgsErro",validacao);
-				return "/disciplina/cadastroDisciplina";
+				model.addAttribute("msgErro",validacao);
+				return "/usuario/cadastroDisciplina";
 			}
 			if (arquivo != null && !arquivo.isEmpty()) {
 				

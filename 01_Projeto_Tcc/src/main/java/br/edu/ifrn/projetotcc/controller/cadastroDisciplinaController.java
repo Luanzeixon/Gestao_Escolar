@@ -37,7 +37,7 @@ public class cadastroDisciplinaController {
 		List<String> validacao = validarDados(disciplina);
 		
 		if(!validacao.isEmpty()) {
-			model.addAttribute("msgsErro",validacao);
+			model.addAttribute("msgErro",validacao);
 			return "/disciplina/cadastroDisciplina";
 		}
 		disciplinaRepository.save(disciplina);

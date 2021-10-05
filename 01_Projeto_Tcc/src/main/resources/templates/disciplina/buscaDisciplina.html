@@ -5,8 +5,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<section layout:fragment="corpo">
-<style>
+	<section layout:fragment="corpo">
+		<style>
 .btn-primary {
 	display: inline-block;
 	background-color: #000;
@@ -20,46 +20,49 @@
 	width: 200px;
 	cursor: pointer;
 }
-
 </style>
-	<div th:replace="fragment/mensagens"></div>
-	<form th:action="@{/disciplinas/buscar}" method="get">
-		<input type="hidden" th:field="${disciplina.id}">
-	<h3>Buscar Disciplina</h3>
-		<table>
-			<tr>
-				<td>Nome Turma:</td>
-				<td><input class="form-control" type="text" th:name="nome"></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td><input class="btn btn-primary" type="submit" value="buscar" /> <input
-					class="btn btn-primary" type="submit" value="voltar" formaction="/buscas" formmethod="get" />
-				</td>
-			</tr>			
-		</table>
-		<hr>
-	</form>
-	<br/>
-	<div th:if="${not #lists.isEmpty(disciplinasEncontradas)}" 
-	class="table-wrapper-scroll-y my-custom-scrollbar">
-		<table class="table table-bordered table-striped mb-0">
-			<tr style="color: white; background-image: linear-gradient(125deg, #3ce7d9, #064497);">
-				<th>Nome</th>
-				<th>Carga Horaria</th>
-				<th>Opções</th>
-			</tr>
-			<tr th:each="d : ${disciplinasEncontradas}">
-				<td th:text="${d.nome}"></td>
-				<td th:text="${d.carga_horaria}"></td>
-				<td><a th:href="'/disciplinas/editar/' + ${d.id}">  <i
+		<div th:replace="fragment/mensagens"></div>
+		<form th:action="@{/disciplinas/buscar}" method="get">
+			
+			<h3>Buscar Disciplina</h3>
+			<table>
+				<tr>
+					<td>Nome Turma:</td>
+					<td><input class="form-control" type="text" th:name="nome"></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input class="btn btn-primary" type="submit"
+						value="buscar" /> <input class="btn btn-primary" type="submit"
+						value="voltar" formaction="/buscas" formmethod="get" /></td>
+				</tr>
+				
+			</table>
+			<hr>
+		</form>
+		<br/>
+		<div th:if="${not #lists.isEmpty(disciplinasEncontradas)}"
+			class="table-wrapper-scroll-y my-custom-scrollbar">
+			<table class="table table-bordered table-striped mb-0">
+			
+				<tr
+					style="color: white; background-image: linear-gradient(125deg, #3ce7d9, #064497);">
+					<th>Nome</th>
+					<th>Carga Horaria</th>
+					<th>Opções</th>
+				</tr>
+				<tr th:each="d : ${disciplinasEncontradas}">
+					<td th:text="${d.nome}"></td>
+					<td th:text="${d.carga_horaria}"></td>
+					<td><a th:href="'/disciplinas/editar/' + ${d.id}"> <i
 							class='bx bx-edit'></i></a> <a
-					th:href="'/disciplinas/remover/' + ${d.id}"
-					onclick="if(!confirm('Deseja realmente remover a Turma?')) return false; ">
-						<i class='bx bx-trash'></i> </a></td>
-			</tr>
-		</table>
-	</div>
-</section>
+						th:href="'/disciplinas/remover/' + ${d.id}"
+						onclick="if(!confirm('Deseja realmente remover a Turma?')) return false; ">
+							<i class='bx bx-trash'></i>
+					</a></td>
+				</tr>
+			</table>
+		</div>
+	</section>
 </body>
 </html>

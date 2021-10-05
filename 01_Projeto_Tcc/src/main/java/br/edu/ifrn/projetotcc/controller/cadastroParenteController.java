@@ -49,8 +49,8 @@ public class cadastroParenteController {
 		try {
 			List<String> validacao = validarDados(usuario);
 			if(!validacao.isEmpty()) {
-				model.addAttribute("msgsErro",validacao);
-				return "/disciplina/cadastroParente";
+				model.addAttribute("msgErro",validacao);
+				return "/usuario/cadastroParente";
 			}
 			if (arquivo != null && !arquivo.isEmpty()) {
 				

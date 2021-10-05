@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.edu.ifrn.projetotcc.DTO.AutocompleteDTO;
+import br.edu.ifrn.projetotcc.dominio.Disciplina;
 import br.edu.ifrn.projetotcc.dominio.Turma;
 import br.edu.ifrn.projetotcc.dominio.Usuario;
 import br.edu.ifrn.projetotcc.repository.TurmaRepository;
@@ -40,6 +41,11 @@ public class cadastroTurmaController {
 	@PostMapping("/salvar")
 	@Transactional(readOnly = false)
 	public String salvarCadastroTurma(Turma turma, RedirectAttributes attr, ModelMap model) {
+		List<String> validacao = validarDados(turma);
+		if(!validacao.isEmpty()) {
+			model.addAttribute("msgErro",validacao);
+			return "/turma/cadastroTurma";
+		}
 		
 		turmaRepository.save(turma);
 		
@@ -84,6 +90,16 @@ public class cadastroTurmaController {
 		turma.getEstudante().remove(estudante);
 		
 		return "turma/cadastroTurma"; 
+	}
+	
+	private List<String> validarDados(Turma turma){
+		List<String> msgs = new ArrayList<>();
+		if(turma.getNome() == null || turma.getNome().isEmpty()) {
+			msgs.add("Campo nome é obrigatorio!");
+		}if(turma.getData() == null || turma.getData().isEmpty()) {
+			msgs.add("Campo data é obrigatorio!");
+		}
+		return msgs;
 	}
 	
 }

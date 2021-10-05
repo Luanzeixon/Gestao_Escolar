@@ -48,8 +48,8 @@ public class cadastroEstudanteController {
 		try {
 			List<String> validacao = validarDados(usuario);
 			if(!validacao.isEmpty()) {
-				model.addAttribute("msgsErro",validacao);
-				return "/disciplina/cadastroEstudante";
+				model.addAttribute("msgErro",validacao);
+				return "/usuario/cadastroEstudante";
 			}
 			if (arquivo != null && !arquivo.isEmpty()) {
 				

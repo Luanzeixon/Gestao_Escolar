@@ -85,9 +85,6 @@ button:focus {
 		<div class="container-fluid px-1 py-5 mx-auto">
 			<div class="row d-flex justify-content-center">
 				<div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
-
-					<input type="hidden" th:field="${disciplina.id}">
-
 					<div class="card">
 
 						<h5 class="text-center mb-4">Cadastro Disciplina</h5>
@@ -97,6 +94,8 @@ button:focus {
 							enctype="multipart/form-data">
 
 							<div th:replace="fragment/mensagens"></div>
+							
+							<input type="hidden" th:field="${disciplina.id}">
 
 							<div th:if="${msgsErro} != null">
 								<ul>
@@ -111,14 +110,14 @@ button:focus {
 									<label class="form-control-label px-3">Nome<span
 										class="text-danger"> *</span></label> <input
 										th:field="${disciplina.nome}" type="text" id="fname"
-										name="fname" placeholder="Nome do Usuario">
+										name="fname" placeholder="Nome da Disciplina">
 								</div>
 
 								<div class="form-group col-sm-6 flex-column d-flex">
 									<label class="form-control-label px-3">Carga Horaria<span
 										class="text-danger"> *</span></label> <input
 										th:field="${disciplina.carga_horaria}" type="text" id="lname"
-										name="lname" placeholder="Email do Usuario">
+										name="lname" placeholder="Carga Horaria">
 								</div>
 
 							</div>
