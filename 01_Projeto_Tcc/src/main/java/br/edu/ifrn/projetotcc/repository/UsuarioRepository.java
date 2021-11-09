@@ -26,4 +26,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario,Integer> {
 			+ "and u.tipo like 'ESTUDANTE' ")	
 	List<Usuario> findByNomeAndEstudante(@Param("nome") String nome);
 	
+	@Query("select u from Usuario u where u.nome like %:nome% "
+			+ "and u.tipo like 'PROFESSOR' ")	
+	List<Usuario> findByNomeAndProfessor(@Param("nome") String nome);
+	
 }

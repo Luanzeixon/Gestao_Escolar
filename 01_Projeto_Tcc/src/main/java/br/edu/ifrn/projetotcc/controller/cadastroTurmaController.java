@@ -57,7 +57,7 @@ public class cadastroTurmaController {
 	@GetMapping("/autocompleteEstudante")
 	@Transactional(readOnly = true) 
 	@ResponseBody 
-	public List<AutocompleteDTO> autocompleteProfissoes(@RequestParam("term") String termo) {
+	public List<AutocompleteDTO> autocompleteEstudante(@RequestParam("term") String termo) {
 
 		List<Usuario> estudante = usuarioRepository.findByNomeAndEstudante(termo);
 
