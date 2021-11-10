@@ -17,8 +17,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.edu.ifrn.projetotcc.DTO.AutocompleteDTO;
 import br.edu.ifrn.projetotcc.dominio.Diario;
+import br.edu.ifrn.projetotcc.dominio.Disciplina;
 import br.edu.ifrn.projetotcc.dominio.Usuario;
 import br.edu.ifrn.projetotcc.repository.DiarioRepository;
+import br.edu.ifrn.projetotcc.repository.DisciplinaRepository;
 import br.edu.ifrn.projetotcc.repository.UsuarioRepository;
 
 @Controller
@@ -30,6 +32,9 @@ public class cadastroDiarioController {
 	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
+	
+	@Autowired
+	private DisciplinaRepository disciplinaRepository;
 	
 	@GetMapping("/cadastroDiario")
 	public String entrarCadastroDiario(ModelMap model) {
@@ -79,6 +84,19 @@ public class cadastroDiarioController {
 		professor.forEach(p -> resultados.add(new AutocompleteDTO(p.getNome(), p.getId())));
 		return resultados;
 	}
+	
+	@GetMapping("/autocompleteDisciplina")
+	@Transactional(readOnly = true) 
+	@ResponseBody 
+	public List<AutocompleteDTO> autocompleteDisciplina(@RequestParam("term") String termo) {
+
+		List<Disciplina> disciplina = disciplinaRepository.findByNome(termo);
+
+		List<AutocompleteDTO> resultados = new ArrayList<>();
+		
+		disciplina.forEach(p -> resultados.add(new AutocompleteDTO(p.getNome(), p.getId())));
+		return resultados;
+	}
 		
 	@PostMapping("/addEstudante")
 	public String addEstudante(Diario diario, ModelMap model) {
@@ -87,17 +105,6 @@ public class cadastroDiarioController {
 			diario.setEstudante(new ArrayList<>());
 		}
 		diario.getEstudante().add(diario.getTipoEstudante());
-		
-		return "diario/cadastroDiario"; 
-	}
-	
-	@PostMapping("/addProfessor")
-	public String addProfessor(Diario diario, ModelMap model) {
-		
-		if(diario.getProfessor() == null) {
-			diario.setProfessor(new Usuario());
-		}
-		
 		
 		return "diario/cadastroDiario"; 
 	}
@@ -115,21 +122,6 @@ public class cadastroDiarioController {
 		
 		return "diario/cadastroDiario"; 
 	}
-	
-	@PostMapping("/removerProfessor/{id}")
-	public String removerProfessor(@PathVariable("id") Integer idProfessor,
-			Diario diario, 
-			ModelMap model ) {
-		
-		Usuario professor = new Usuario();
-		
-		professor.setId(idProfessor);
-		
-		diario.getEstudante().remove(professor);
-		
-		return "diario/cadastroDiario"; 
-	}
-	
 	
 	private List<String> validarDados(Diario diario){
 		List<String> msgs = new ArrayList<>();

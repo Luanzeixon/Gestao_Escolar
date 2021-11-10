@@ -24,7 +24,7 @@ public class buscaDiarioController {
 	
 	@GetMapping("/buscaDiario")
 	public String entrarBuscaTurma(){
-		return "turma/buscaDiario";
+		return "diario/buscaDiario";
 	}
 	
 	@GetMapping("/buscar")
@@ -54,7 +54,7 @@ public class buscaDiarioController {
 		
 		Diario d = diarioRepository.findById(idDiario).get();
 		
-		model.addAttribute("turma", d); 
+		model.addAttribute("diario", d); 
 		 
 		return "/diario/cadastroDiario";
 	}

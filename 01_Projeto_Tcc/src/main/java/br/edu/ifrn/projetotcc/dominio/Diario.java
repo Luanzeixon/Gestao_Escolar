@@ -84,7 +84,7 @@ public class Diario {
 	public void setEstudante(List<Usuario> estudante) {
 		this.estudante = estudante;
 	}
-	
+
 	public Usuario getProfessor() {
 		return professor;
 	}

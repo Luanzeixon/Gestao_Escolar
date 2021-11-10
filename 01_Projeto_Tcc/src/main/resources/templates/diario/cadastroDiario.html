@@ -9,7 +9,7 @@
 <script>
 	$(function() {
 		$("#estudante").autocomplete({
-			source : "/turmas/autocompleteEstudante",
+			source : "/diarios/autocompleteEstudante",
 			minLengh : 1,
 			select : function(event, ui) {
 				this.value = ui.item.label;
@@ -20,11 +20,22 @@
 	});
 	$(function() {
 		$("#professor").autocomplete({
-			source : "/turmas/autocompleteProfessor",
+			source : "/diarios/autocompleteProfessor",
 			minLengh : 1,
 			select : function(event, ui) {
 				this.value = ui.item.label;
 				$("#idProfessor").val(ui.item.value);
+				return false;
+			}
+		});
+	});
+	$(function() {
+		$("#disciplina").autocomplete({
+			source : "/diarios/autocompleteDisciplina",
+			minLengh : 1,
+			select : function(event, ui) {
+				this.value = ui.item.label;
+				$("#idDisciplina").val(ui.item.value);
 				return false;
 			}
 		});
@@ -145,6 +156,8 @@ button:focus {
 								</div>
 
 							</div>
+							
+							
 							<div class="row justify-content-between text-left">
 								<div class="form-group col-12 flex-column d-flex">
 									<label class="form-label" for="customFile">Estudante</label><input
@@ -152,16 +165,6 @@ button:focus {
 										id="idEstudante" type="hidden"
 										th:field="${diario.tipoEstudante.id}" /> <input type="submit"
 										value="Adicionar" formaction="/diarios/addEstudante"
-										formmethod="post" />
-								</div>
-							</div>
-							<div class="row justify-content-between text-left">
-								<div class="form-group col-12 flex-column d-flex">
-									<label class="form-label" for="customFile">Professor</label><input
-										id="professor" th:field="${diario.tipoProfessor.nome}" /> <input
-										id="idProfessor" type="hidden"
-										th:field="${diario.tipoProfessor.id}" /> <input type="submit"
-										value="Adicionar" formaction="/diarios/addProfessor"
 										formmethod="post" />
 								</div>
 							</div>
@@ -186,29 +189,32 @@ button:focus {
 									type="hidden" th:each="f, itemStat : ${diario.estudante}"
 									th:field="${diario.estudante[__${itemStat.index}__].nome}" />
 							</div>
-							
-							<div
-								th:if="${diario.professor} != null and
-					${!diario.professor.empty}">
-								<table>
-									<caption>Professor</caption>
-									<tr>
-										<th>Nome:</th>
-										<th></th>
-									</tr>
-									<tr th:each="f : ${diario.professor}">
-										<td th:text="${f.nome}"></td>
-										<td><input type="submit" value="Remover"
-											th:formaction="@{/diarios/removerProfessor/} + ${f.id}"
-											formmethod="post"></td>
-									</tr>
-								</table>
-								<input type="hidden" th:each="f, itemStat : ${diario.professor}"
-									th:field="${diario.professor[__${itemStat.index}__].id}" /> <input
-									type="hidden" th:each="f, itemStat : ${diario.professor}"
-									th:field="${diario.professor[__${itemStat.index}__].nome}" />
+					
+					
+					
+					
+							<div class="row justify-content-between text-left">
+								<div class="form-group col-12 flex-column d-flex">
+									<label class="form-label" for="customFile">Professor</label><input
+										id="professor" th:field="${diario.professor.nome}" /> <input
+										id="idProfessor" type="hidden"
+										th:field="${diario.professor.id}" />
+								</div>
 							</div>
-
+							
+							
+							
+							<div class="row justify-content-between text-left">
+								<div class="form-group col-12 flex-column d-flex">
+									<label class="form-label" for="customFile">Disciplina</label><input
+										id="disciplina" th:field="${diario.disciplina.nome}" /> <input
+										id="idDisciplina" type="hidden"
+										th:field="${diario.disciplina.id}" />
+								</div>
+							</div>
+							
+							
+							
 							<div class="row justify-content-end">
 								<div class="form-group col-sm-12">
 									<input class="btn btn-primary" type="submit"
