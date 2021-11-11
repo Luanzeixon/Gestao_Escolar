@@ -59,9 +59,14 @@ public class inicioCotroller {
 		return "usuario/dadosUsuario";
 	}
 	@GetMapping("/documentos")
-	public String doc(ModelMap model) {
+	public String docs(ModelMap model) {
 		model.addAttribute("usuario", retornarUsuario());
 		return "documentos";
+	}
+	@GetMapping("/diarios")
+	public String diarios(ModelMap model) {
+		model.addAttribute("usuario", retornarUsuario());
+		return "usuario/professor/paginaProfessor";
 	}
 	public Usuario retornarUsuario() {
 		// BUSCANDO DADOS DO USUARIO LOGADO

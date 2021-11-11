@@ -30,14 +30,8 @@ public class Diario {
 	@ManyToOne
 	private Usuario professor;
 	
-	@Transient
-	private Usuario tipoProfessor;
-	
 	@ManyToOne
 	private Disciplina disciplina;
-	
-	@Transient
-	private Disciplina tipoDisciplina;
 
 	@Override
 	public int hashCode() {
@@ -108,23 +102,5 @@ public class Diario {
 	public void setTipoEstudante(Usuario tipoEstudante) {
 		this.tipoEstudante = tipoEstudante;
 	}
-
-	public Usuario getTipoProfessor() {
-		return tipoProfessor;
-	}
-
-	public void setTipoProfessor(Usuario tipoProfessor) {
-		this.tipoProfessor = tipoProfessor;
-	}
-
-	public Disciplina getTipoDisciplina() {
-		return tipoDisciplina;
-	}
-
-	public void setTipoDisciplina(Disciplina tipoDisciplina) {
-		this.tipoDisciplina = tipoDisciplina;
-	}
-	
-	
 
 }

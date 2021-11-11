@@ -12,4 +12,7 @@ public interface DiarioRepository extends JpaRepository<Diario,Integer> {
 	
 	@Query("select d from Diario d where d.nome like %:nome%")	
 	List<Diario> findByNome(@Param("nome") String nome);
+	
+	@Query(value = "select d from Diario d where d.professor_id like %:id%" , nativeQuery = true  )	
+	List<Diario> findByProfessor(@Param("id") String id);
 }
