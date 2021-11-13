@@ -38,7 +38,7 @@ public class buscaDiarioProfessorController {
 			ModelMap model) {
 		
 		String id = Integer.toString(retornarUsuario().getId());
-		List<Diario> diariosEncontrados = diarioRepository.findByProfessor(id);
+		List<Diario> diariosEncontrados = diarioRepository.findByProfessorAndId(id, nome);
 		
 		model.addAttribute("diariosEncontrados", diariosEncontrados);
 		
