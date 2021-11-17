@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 @Entity
@@ -32,6 +33,7 @@ public class Diario {
 	
 	@ManyToOne
 	private Disciplina disciplina;
+	
 
 	@Override
 	public int hashCode() {
