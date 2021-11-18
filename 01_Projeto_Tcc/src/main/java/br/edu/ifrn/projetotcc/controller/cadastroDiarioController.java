@@ -117,6 +117,8 @@ public class cadastroDiarioController {
 			Diario diario, 
 			ModelMap model ) {
 		
+		model.addAttribute("usuario", retornarUsuario());
+		
 		Usuario estudante = new Usuario();
 		
 		estudante.setId(idEstudante);
