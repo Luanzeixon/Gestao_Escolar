@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
@@ -39,6 +41,7 @@ public class cadastroDiarioController {
 	@GetMapping("/cadastroDiario")
 	public String entrarCadastroDiario(ModelMap model) {
 		model.addAttribute("diario", new Diario());
+		model.addAttribute("usuario", retornarUsuario());
 		return "diario/cadastroDiario";
 	}
 	
@@ -135,5 +138,12 @@ public class cadastroDiarioController {
 			msgs.add("Campo professor é obrigatorio!");
 		}
 		return msgs;
+	}
+	
+	public Usuario retornarUsuario() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String email = authentication.getName();
+		Usuario usuario = usuarioRepository.findByEmail(email).get();
+		return usuario;
 	}
 }

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
@@ -35,6 +37,7 @@ public class cadastroTurmaController {
 	@GetMapping("/cadastroTurma")
 	public String entrarCadastroDisciplina(ModelMap model) {
 		model.addAttribute("turma", new Turma());
+		model.addAttribute("usuario", retornarUsuario());
 		return "turma/cadastroTurma";
 	}
 	
@@ -102,4 +105,10 @@ public class cadastroTurmaController {
 		return msgs;
 	}
 	
+	public Usuario retornarUsuario() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String email = authentication.getName();
+		Usuario usuario = usuarioRepository.findByEmail(email).get();
+		return usuario;
+	}
 }

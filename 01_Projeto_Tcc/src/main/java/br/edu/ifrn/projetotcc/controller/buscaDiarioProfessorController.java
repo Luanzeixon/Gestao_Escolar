@@ -28,7 +28,8 @@ public class buscaDiarioProfessorController {
 	private UsuarioRepository usuarioRepository;
 	
 	@GetMapping("/busca")
-	public String entrarDiarioP(){
+	public String entrarDiarioP(ModelMap model){
+		model.addAttribute("usuario", retornarUsuario());
 		return "usuario/professor/paginaDiarioProfessor";
 	}
 	

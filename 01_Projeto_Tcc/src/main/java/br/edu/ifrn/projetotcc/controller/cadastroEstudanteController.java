@@ -7,6 +7,8 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,6 +40,7 @@ public class cadastroEstudanteController {
 	@GetMapping("/cadastroEstudante")
 	public String entrarCadastroEstudante(ModelMap model) {
 		model.addAttribute("usuario", new Usuario());
+		model.addAttribute("usuario", retornarUsuario());
 		return "usuario/cadastroEstudante";
 	}
 
@@ -103,4 +106,10 @@ public class cadastroEstudanteController {
 		return msgs;
 	}
 	
+	public Usuario retornarUsuario() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String email = authentication.getName();
+		Usuario usuario = usuarioRepository.findByEmail(email).get();
+		return usuario;
+	}
 }
