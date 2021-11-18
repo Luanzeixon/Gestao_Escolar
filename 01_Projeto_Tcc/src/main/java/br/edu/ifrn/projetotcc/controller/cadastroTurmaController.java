@@ -72,7 +72,7 @@ public class cadastroTurmaController {
 	
 	@PostMapping("/addEstudante")
 	public String addEstudante(Turma turma, ModelMap model) {
-		
+		model.addAttribute("usuario", retornarUsuario());
 		if(turma.getEstudante() == null) {
 			turma.setEstudante(new ArrayList<>());
 		}

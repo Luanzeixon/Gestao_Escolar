@@ -34,6 +34,11 @@ public class Diario {
 	@ManyToOne
 	private Disciplina disciplina;
 	
+	@OneToMany
+	private List<Nota> nota;
+	
+	@OneToMany
+	private List<Frequencia> frequencia;
 
 	@Override
 	public int hashCode() {

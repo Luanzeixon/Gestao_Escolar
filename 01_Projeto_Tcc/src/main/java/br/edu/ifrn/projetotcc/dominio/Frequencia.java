@@ -13,9 +13,8 @@ public class Frequencia {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	/*@ManyToOne
+	@ManyToOne
 	private Diario diario;
-	*/
 	
 	@ManyToOne
 	private Usuario aluno;
@@ -56,6 +55,14 @@ public class Frequencia {
 
 	public void setAluno(Usuario aluno) {
 		this.aluno = aluno;
+	}
+
+	public Diario getDiario() {
+		return diario;
+	}
+
+	public void setDiario(Diario diario) {
+		this.diario = diario;
 	}
 	
 	

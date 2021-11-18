@@ -20,10 +20,8 @@ public class Nota {
 	@Column
 	private double nota2;
 	
-	/*
 	@ManyToOne
 	private Diario diario;
-	*/
 	
 	@ManyToOne
 	private Usuario aluno;
@@ -80,6 +78,14 @@ public class Nota {
 
 	public void setAluno(Usuario aluno) {
 		this.aluno = aluno;
+	}
+
+	public Diario getDiario() {
+		return diario;
+	}
+
+	public void setDiario(Diario diario) {
+		this.diario = diario;
 	}
 	
 	

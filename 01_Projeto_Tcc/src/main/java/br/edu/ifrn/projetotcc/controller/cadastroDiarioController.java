@@ -103,7 +103,7 @@ public class cadastroDiarioController {
 		
 	@PostMapping("/addEstudante")
 	public String addEstudante(Diario diario, ModelMap model) {
-		
+		model.addAttribute("usuario", retornarUsuario());	
 		if(diario.getEstudante() == null) {
 			diario.setEstudante(new ArrayList<>());
 		}
