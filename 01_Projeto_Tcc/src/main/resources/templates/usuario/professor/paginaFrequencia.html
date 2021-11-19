@@ -21,10 +21,11 @@
 	cursor: pointer;
 }
 </style>
-		<h3>Frequencia</h3>
+		<h3>Frequencia do dia:</h3>
 		<div th:replace="fragment/mensagens"></div>
-		<form th:action="@{/diariosProfessor/salvarFrequencia}" th:object="${frequencia}">
-		<input type="date" value="${data}" />
+		<form th:action="@{/diariosProfessor/salvarFrequencia}" th:object="${frequencia}" method="get">
+		<input type="date" th:value="${frequencia.data}" />
+		<input type="hidden" >
 		<input type="hidden" th:field="${frequencia.id}">
 		
 		<div th:if="${not #lists.isEmpty(usuariosEncontrados)}"
@@ -39,7 +40,7 @@
 				</tr>
 				<tr th:each="u : ${usuariosEncontrados}">
 					<td th:text="${u.nome}"></td>
-					<td><input type="text"></td>
+					<td style="width: 70px"><input class="form-control" type="text" style="width: 50px"></td>
 					<td></td>
 				</tr>
 			</table>

@@ -76,18 +76,12 @@ public class buscaDiarioProfessorController {
 	}
 	
 	@PostMapping("/salvarFrequencia")
-	public String salvarFrequencia(@RequestParam(name = "data", required = false) String data, Frequencia frequencia,
+	public String salvarFrequencia(Frequencia frequencia,
 			RedirectAttributes attr) {
 		
-		SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-		try {
-			Date dataF = format.parse(data);
-			frequencia.setData(dataF);
 			frequenciaRepository.save(frequencia);
 			attr.addFlashAttribute("msgSucesso", "Frequencia salva");
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		
 		
 		return null;
 	}

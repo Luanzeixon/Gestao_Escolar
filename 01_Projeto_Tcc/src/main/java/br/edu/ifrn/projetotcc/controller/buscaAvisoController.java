@@ -14,60 +14,65 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.edu.ifrn.projetotcc.dominio.Diario;
+import br.edu.ifrn.projetotcc.dominio.Aviso;
+import br.edu.ifrn.projetotcc.dominio.Disciplina;
 import br.edu.ifrn.projetotcc.dominio.Usuario;
-import br.edu.ifrn.projetotcc.repository.DiarioRepository;
+import br.edu.ifrn.projetotcc.repository.AvisoRepository;
+import br.edu.ifrn.projetotcc.repository.DisciplinaRepository;
 import br.edu.ifrn.projetotcc.repository.UsuarioRepository;
 
 @Controller
-@RequestMapping("/diarios")
-public class buscaDiarioController {
+@RequestMapping("/avisos")
+public class buscaAvisoController {
 	
 	@Autowired
-	private DiarioRepository diarioRepository;
+	private AvisoRepository avisoRepository;
 	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
-	@GetMapping("/buscaDiario")
-	public String entrarBuscaTurma(ModelMap model){
+	@GetMapping("/buscaAvisos")
+	public String entrarBuscaDisciplina(ModelMap model){
 		model.addAttribute("usuario", retornarUsuario());
-		return "diario/buscaDiario";
+		return "usuario/secretario/buscaAviso";
 	}
 	
 	@GetMapping("/buscar")
 	@Transactional(readOnly = false)
-	public String buscar(@RequestParam(name = "nome", required = false) String nome,
+	public String buscar(@RequestParam(name = "remetente", required = false) String remetente,
 			ModelMap model) {
+		
 		model.addAttribute("usuario", retornarUsuario());
 		
-		List<Diario> diariosEncontrados = diarioRepository.findByNome(nome);
+		List<Aviso> avisosEncontrados = avisoRepository.findByNome(remetente);
 		
-		model.addAttribute("diariosEncontrados", diariosEncontrados);
+		model.addAttribute("avisosEncontrados", avisosEncontrados);
 		
-				return "diario/buscaDiario";
+				return "usuario/secretario/buscaAviso";
 		
 	}
 	
 	@GetMapping("/remover/{id}")
-	public String iniciarRemocao(@PathVariable("id") Integer idDiario, RedirectAttributes attr) {
+	public String iniciarRemocao(@PathVariable("id") Integer idAviso, RedirectAttributes attr, ModelMap model) {
+		model.addAttribute("usuario", retornarUsuario());
+		
+		avisoRepository.deleteById(idAviso);
+		attr.addFlashAttribute("msgSucesso", "Aviso removido com sucesso");
 
-		diarioRepository.deleteById(idDiario);
-		attr.addFlashAttribute("msgSucesso", "Diario removido com sucesso");
-
-		return "redirect:/diarios/buscar";
+		return "redirect:/avisos/buscar";
 	}
 	
 	@GetMapping("/editar/{id}")
-	public String iniciarEdicao(@PathVariable("id") Integer idDiario, ModelMap model ) {
+	public String iniciarEdicao(@PathVariable("id") Integer idAviso, ModelMap model ) {
 		model.addAttribute("usuario", retornarUsuario());
 		
-		Diario d = diarioRepository.findById(idDiario).get();
+		Aviso a = avisoRepository.findById(idAviso).get();
 		
-		model.addAttribute("diario", d); 
+		model.addAttribute("aviso", a); 
 		 
-		return "/diario/cadastroDiario";
+		return "usuario/secretario/cadastroAviso";
 	}
+	
 	public Usuario retornarUsuario() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String email = authentication.getName();

@@ -1,5 +1,7 @@
 package br.edu.ifrn.projetotcc.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -7,7 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import br.edu.ifrn.projetotcc.dominio.Aviso;
 import br.edu.ifrn.projetotcc.dominio.Usuario;
+import br.edu.ifrn.projetotcc.repository.AvisoRepository;
 import br.edu.ifrn.projetotcc.repository.UsuarioRepository;
 
 @Controller
@@ -15,10 +19,18 @@ public class inicioCotroller {
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;
+	
+	@Autowired
+	private AvisoRepository avisoRepository;
 
 	@GetMapping("/")
 	public String inicio(ModelMap model) {
 		model.addAttribute("usuario", retornarUsuario());
+		List<Aviso> avisosEncontrados = avisoRepository.findAll();
+		int qnt = avisosEncontrados.size();
+		model.addAttribute("avisosEncontrados", avisosEncontrados);
+		model.addAttribute("qnt", qnt);
+		
 			return "inicio";
 		
 	}
@@ -67,6 +79,11 @@ public class inicioCotroller {
 	public String diarios(ModelMap model) {
 		model.addAttribute("usuario", retornarUsuario());
 		return "usuario/professor/paginaProfessor";
+	}
+	@GetMapping("/avisos")
+	public String avisos(ModelMap model) {
+		model.addAttribute("usuario", retornarUsuario());
+		return "usuario/secretario/paginaAviso";
 	}
 	public Usuario retornarUsuario() {
 		// BUSCANDO DADOS DO USUARIO LOGADO

@@ -1,32 +1,23 @@
 package br.edu.ifrn.projetotcc.dominio;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-public class Frequencia {
+public class Aviso {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
 	@Column
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
-	private Date data;
+	private String remetente;
 	
-	@ManyToOne
-	private Diario diario;
-	
-	@ManyToOne
-	private Usuario aluno;
+	@Column
+	private String texto;
 
 	@Override
 	public int hashCode() {
@@ -44,7 +35,7 @@ public class Frequencia {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Frequencia other = (Frequencia) obj;
+		Aviso other = (Aviso) obj;
 		if (id != other.id)
 			return false;
 		return true;
@@ -58,29 +49,21 @@ public class Frequencia {
 		this.id = id;
 	}
 
-	public Usuario getAluno() {
-		return aluno;
+	public String getRemetente() {
+		return remetente;
 	}
 
-	public void setAluno(Usuario aluno) {
-		this.aluno = aluno;
+	public void setRemetente(String remetente) {
+		this.remetente = remetente;
 	}
 
-	public Diario getDiario() {
-		return diario;
+	public String getTexto() {
+		return texto;
 	}
 
-	public void setDiario(Diario diario) {
-		this.diario = diario;
-	}
-
-	public Date getData() {
-		return data;
-	}
-
-	public void setData(Date data) {
-		this.data = data;
-	}
+	public void setTexto(String texto) {
+		this.texto = texto;
+	} 
 	
 	
 }
