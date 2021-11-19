@@ -17,4 +17,5 @@ public interface DiarioRepository extends JpaRepository<Diario,Integer> {
 			+ " and d.nome like %:nome% ")	
 	List<Diario> findByProfessorAndId(@Param("id") int id, 
 			@Param("nome") String nome);
+	
 }

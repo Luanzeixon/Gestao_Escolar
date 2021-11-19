@@ -48,6 +48,9 @@
 			</tr>
 			<tr th:each="t : ${diariosEncontrados}">
 				<td th:text="${t.nome}"></td>
+				<td><a th:href="'/diariosProfessor/frequencia/' + ${t.id}"> <i
+							class='bx bx-edit'></i>
+					</a>
 			</tr>
 		</table>
 	</div>

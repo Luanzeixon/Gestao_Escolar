@@ -1,5 +1,8 @@
 package br.edu.ifrn.projetotcc.dominio;
 
+import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +15,9 @@ public class Frequencia {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
+	@Column
+	private Date data;
 	
 	@ManyToOne
 	private Diario diario;
@@ -63,6 +69,14 @@ public class Frequencia {
 
 	public void setDiario(Diario diario) {
 		this.diario = diario;
+	}
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
 	}
 	
 	
