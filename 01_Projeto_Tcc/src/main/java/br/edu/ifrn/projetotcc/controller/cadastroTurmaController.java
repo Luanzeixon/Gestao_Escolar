@@ -37,7 +37,7 @@ public class cadastroTurmaController {
 	@GetMapping("/cadastroTurma")
 	public String entrarCadastroDisciplina(ModelMap model) {
 		model.addAttribute("turma", new Turma());
-		model.addAttribute("usuario", retornarUsuario());
+		model.addAttribute("u", retornarUsuario());
 		return "turma/cadastroTurma";
 	}
 	
@@ -72,7 +72,7 @@ public class cadastroTurmaController {
 	
 	@PostMapping("/addEstudante")
 	public String addEstudante(Turma turma, ModelMap model) {
-		model.addAttribute("usuario", retornarUsuario());
+		model.addAttribute("u", retornarUsuario());
 		if(turma.getEstudante() == null) {
 			turma.setEstudante(new ArrayList<>());
 		}
@@ -86,7 +86,7 @@ public class cadastroTurmaController {
 			Turma turma, 
 			ModelMap model ) {
 		
-		model.addAttribute("usuario", retornarUsuario());
+		model.addAttribute("u", retornarUsuario());
 		
 		Usuario estudante = new Usuario();
 		

@@ -110,4 +110,20 @@ public class Diario {
 		this.tipoEstudante = tipoEstudante;
 	}
 
+	public List<Nota> getNota() {
+		return nota;
+	}
+
+	public void setNota(List<Nota> nota) {
+		this.nota = nota;
+	}
+
+	public List<Frequencia> getFrequencia() {
+		return frequencia;
+	}
+
+	public void setFrequencia(List<Frequencia> frequencia) {
+		this.frequencia = frequencia;
+	}
+	
 }

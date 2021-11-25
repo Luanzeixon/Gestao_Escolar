@@ -41,7 +41,7 @@ public class buscaDiarioProfessorController {
 	
 	@GetMapping("/busca")
 	public String entrarDiarioP(ModelMap model){
-		model.addAttribute("usuario", retornarUsuario());
+		model.addAttribute("u", retornarUsuario());
 		return "usuario/professor/paginaDiarioProfessor";
 	}
 	
@@ -49,7 +49,7 @@ public class buscaDiarioProfessorController {
 	@Transactional(readOnly = false)
 	public String buscar(@RequestParam(name = "nome", required = false) String nome,
 			ModelMap model) {
-		model.addAttribute("usuario", retornarUsuario());
+		model.addAttribute("u", retornarUsuario());
 		
 		int id = retornarUsuario().getId();
 		List<Diario> diariosEncontrados = diarioRepository.findByProfessorAndId(id, nome);
@@ -62,11 +62,12 @@ public class buscaDiarioProfessorController {
 	
 	@GetMapping("/frequencia/{id}")
 	public String frequencia(@PathVariable("id") Integer idDiario, ModelMap model) {
-		model.addAttribute("usuario", retornarUsuario());
+		model.addAttribute("u", retornarUsuario());
 		
 		model.addAttribute("frequencia", new Frequencia());
+	
 		Diario d = diarioRepository.findById(idDiario).get();
-		
+
 		List<Usuario> usuariosEncontrados = d.getEstudante();
 		model.addAttribute("usuariosEncontrados", usuariosEncontrados);
 		
@@ -77,13 +78,14 @@ public class buscaDiarioProfessorController {
 	
 	@PostMapping("/salvarFrequencia")
 	public String salvarFrequencia(Frequencia frequencia,
-			RedirectAttributes attr) {
-		
+			RedirectAttributes attr, ModelMap model) {
+			model.addAttribute("u", retornarUsuario());
+			
 			frequenciaRepository.save(frequencia);
 			attr.addFlashAttribute("msgSucesso", "Frequencia salva");
 		
 		
-		return null;
+		return "redirect:/diariosProfessor/busca";
 	}
 	
 	public Usuario retornarUsuario() {

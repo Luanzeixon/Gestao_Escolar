@@ -31,7 +31,7 @@ public class buscaDiarioController {
 	
 	@GetMapping("/buscaDiario")
 	public String entrarBuscaTurma(ModelMap model){
-		model.addAttribute("usuario", retornarUsuario());
+		model.addAttribute("u", retornarUsuario());
 		return "diario/buscaDiario";
 	}
 	
@@ -39,7 +39,7 @@ public class buscaDiarioController {
 	@Transactional(readOnly = false)
 	public String buscar(@RequestParam(name = "nome", required = false) String nome,
 			ModelMap model) {
-		model.addAttribute("usuario", retornarUsuario());
+		model.addAttribute("u", retornarUsuario());
 		
 		List<Diario> diariosEncontrados = diarioRepository.findByNome(nome);
 		
@@ -60,7 +60,7 @@ public class buscaDiarioController {
 	
 	@GetMapping("/editar/{id}")
 	public String iniciarEdicao(@PathVariable("id") Integer idDiario, ModelMap model ) {
-		model.addAttribute("usuario", retornarUsuario());
+		model.addAttribute("u", retornarUsuario());
 		
 		Diario d = diarioRepository.findById(idDiario).get();
 		

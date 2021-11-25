@@ -25,7 +25,7 @@ public class inicioCotroller {
 
 	@GetMapping("/")
 	public String inicio(ModelMap model) {
-		model.addAttribute("usuario", retornarUsuario());
+		model.addAttribute("u", retornarUsuario());
 		List<Aviso> avisosEncontrados = avisoRepository.findAll();
 		int qnt = avisosEncontrados.size();
 		model.addAttribute("avisosEncontrados", avisosEncontrados);
@@ -48,41 +48,41 @@ public class inicioCotroller {
 
 	@GetMapping("/cadastros")
 	public String cadastros(ModelMap model) {
-		model.addAttribute("usuario", retornarUsuario());
+		model.addAttribute("u", retornarUsuario());
 		return "usuario/secretario/paginaCadastro";
 
 	}
 
 	@GetMapping("/buscas")
 	public String buscas(ModelMap model) {
-		model.addAttribute("usuario", retornarUsuario());
+		model.addAttribute("u", retornarUsuario());
 		return "usuario/secretario/paginaBuscaEditar";
 	}
 
 	@GetMapping("/calendario")
 	public String calendario(ModelMap model) {
-		model.addAttribute("usuario", retornarUsuario());
+		model.addAttribute("u", retornarUsuario());
 		return "calendario";
 	}
 
 	@GetMapping("/dados")
 	public String dados(ModelMap model) {
-		model.addAttribute("usuario", retornarUsuario());
+		model.addAttribute("u", retornarUsuario());
 		return "usuario/dadosUsuario";
 	}
 	@GetMapping("/documentos")
 	public String docs(ModelMap model) {
-		model.addAttribute("usuario", retornarUsuario());
+		model.addAttribute("u", retornarUsuario());
 		return "documentos";
 	}
 	@GetMapping("/diarios")
 	public String diarios(ModelMap model) {
-		model.addAttribute("usuario", retornarUsuario());
+		model.addAttribute("u", retornarUsuario());
 		return "usuario/professor/paginaProfessor";
 	}
 	@GetMapping("/avisos")
 	public String avisos(ModelMap model) {
-		model.addAttribute("usuario", retornarUsuario());
+		model.addAttribute("u", retornarUsuario());
 		return "usuario/secretario/paginaAviso";
 	}
 	public Usuario retornarUsuario() {

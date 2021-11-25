@@ -29,7 +29,7 @@ public class buscaUsuarioController {
 	
 	@GetMapping("/busca")
 	public String entrarBusca(ModelMap model) {
-		model.addAttribute("usuario", retornarUsuario());
+		model.addAttribute("u", retornarUsuario());
 		return "/usuario/busca";
 	}
 	
@@ -41,7 +41,7 @@ public class buscaUsuarioController {
 			Boolean mostrarTodosDados, 
 			ModelMap model) {
 		
-		model.addAttribute("usuario", retornarUsuario());
+		model.addAttribute("u", retornarUsuario());
 		
 		List<Usuario> usuariosEncontrados = usuarioRepository.findByEmailAndNome(email, nome);
 		

@@ -31,7 +31,7 @@ public class cadastroAvisosControlller {
 	
 	@GetMapping("/cadastro")
 	public String entrarCadastroAviso(ModelMap model) {
-		model.addAttribute("usuario", retornarUsuario());
+		model.addAttribute("u", retornarUsuario());
 		model.addAttribute("aviso", new Aviso());
 		return "usuario/secretario/cadastroAviso";
 	}

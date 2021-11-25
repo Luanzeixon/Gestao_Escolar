@@ -31,7 +31,7 @@ public class buscaTurmaController {
 	
 	@GetMapping("/buscaTurma")
 	public String entrarBuscaTurma(ModelMap model){
-		model.addAttribute("usuario", retornarUsuario());
+		model.addAttribute("u", retornarUsuario());
 		return "turma/buscaTurma";
 	}
 	

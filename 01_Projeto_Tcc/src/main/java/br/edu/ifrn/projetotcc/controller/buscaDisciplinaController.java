@@ -31,7 +31,7 @@ public class buscaDisciplinaController {
 	
 	@GetMapping("/buscaDisciplina")
 	public String entrarBuscaDisciplina(ModelMap model){
-		model.addAttribute("usuario", retornarUsuario());
+		model.addAttribute("u", retornarUsuario());
 		return "disciplina/buscaDisciplina";
 	}
 	
@@ -40,7 +40,7 @@ public class buscaDisciplinaController {
 	public String buscar(@RequestParam(name = "nome", required = false) String nome,
 			ModelMap model) {
 		
-		model.addAttribute("usuario", retornarUsuario());
+		model.addAttribute("u", retornarUsuario());
 		
 		List<Disciplina> disciplinasEncontradas = disciplinaRepository.findByNome(nome);
 		

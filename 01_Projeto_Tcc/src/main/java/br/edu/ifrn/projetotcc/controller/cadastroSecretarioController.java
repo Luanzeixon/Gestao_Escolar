@@ -42,7 +42,7 @@ public class cadastroSecretarioController {
 	@GetMapping("/cadastroSecretario")
 	public String entrarCadastroParente(ModelMap model) {
 		model.addAttribute("usuario", new Usuario());
-		model.addAttribute("usuario", retornarUsuario());
+		model.addAttribute("u", retornarUsuario());
 		return "usuario/cadastroSecretario";
 	}
 

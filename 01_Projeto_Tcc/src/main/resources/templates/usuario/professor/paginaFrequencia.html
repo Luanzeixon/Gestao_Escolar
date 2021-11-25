@@ -23,30 +23,32 @@
 </style>
 		<h3>Frequencia do dia:</h3>
 		<div th:replace="fragment/mensagens"></div>
-		<form th:action="@{/diariosProfessor/salvarFrequencia}" th:object="${frequencia}" method="get">
-		<input type="date" th:value="${frequencia.data}" />
-		<input type="hidden" >
-		<input type="hidden" th:field="${frequencia.id}">
-		
-		<div th:if="${not #lists.isEmpty(usuariosEncontrados)}"
-			class="table-wrapper-scroll-y my-custom-scrollbar">
-			<br/>
-			<table class="table table-bordered table-striped mb-0">
-				<tr
-					style="color: white; background-image: linear-gradient(125deg, #064497, #3ce7d9);">
-					<th>Nome do Estudante</th>
-					<th>Faltas</th>
-					<th>Opções</th>
-				</tr>
-				<tr th:each="u : ${usuariosEncontrados}">
-					<td th:text="${u.nome}"></td>
-					<td style="width: 70px"><input class="form-control" type="text" style="width: 50px"></td>
-					<td></td>
-				</tr>
-			</table>
-			<br/>
-		</div>
-		<input type="submit" class="btn btn-primary" value="Salvar">
+		<form th:action="@{/diariosProfessor/salvarFrequencia}"
+			th:object="${diario}" method="post" enctype="multipart/form-data">
+			<input type="date" th:field="${frequencia.data}" /> <input type="hidden"
+				th:field="${frequencia.id}">
+
+			<div th:if="${not #lists.isEmpty(usuariosEncontrados)}"
+				class="table-wrapper-scroll-y my-custom-scrollbar">
+				<br />
+				<table class="table table-bordered table-striped mb-0">
+					<tr
+						style="color: white; background-image: linear-gradient(125deg, #064497, #3ce7d9);">
+						<th>Nome do Estudante</th>
+						<th>Faltas</th>
+						<th>Opções</th>
+					</tr>
+					<tr th:each="u : ${usuariosEncontrados}">
+						<input th:field="${frequencia.aluno}" type="hidden">
+						<td th:text="${u.nome}"></td>
+						<td style="width: 70px"><input
+							th:field="${frequencia.falta}" class="form-control"
+							type="text" style="width: 50px"></td>
+						<td></td>
+					</tr>
+				</table>
+			</div>
+			<input type="submit" class="btn btn-primary" value="Salvar">
 		</form>
 	</section>
 

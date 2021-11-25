@@ -42,7 +42,7 @@ public class buscaAvisoController {
 	public String buscar(@RequestParam(name = "remetente", required = false) String remetente,
 			ModelMap model) {
 		
-		model.addAttribute("usuario", retornarUsuario());
+		model.addAttribute("u", retornarUsuario());
 		
 		List<Aviso> avisosEncontrados = avisoRepository.findByNome(remetente);
 		

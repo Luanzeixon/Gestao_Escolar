@@ -41,7 +41,7 @@ public class cadastroDiarioController {
 	@GetMapping("/cadastroDiario")
 	public String entrarCadastroDiario(ModelMap model) {
 		model.addAttribute("diario", new Diario());
-		model.addAttribute("usuario", retornarUsuario());
+		model.addAttribute("u", retornarUsuario());
 		return "diario/cadastroDiario";
 	}
 	
@@ -103,7 +103,7 @@ public class cadastroDiarioController {
 		
 	@PostMapping("/addEstudante")
 	public String addEstudante(Diario diario, ModelMap model) {
-		model.addAttribute("usuario", retornarUsuario());	
+		model.addAttribute("u", retornarUsuario());	
 		if(diario.getEstudante() == null) {
 			diario.setEstudante(new ArrayList<>());
 		}

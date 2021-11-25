@@ -33,7 +33,7 @@ public class cadastroDisciplinaController {
 	@GetMapping("/cadastroDisciplina")
 	public String entrarCadastroDisciplina(ModelMap model) {
 		model.addAttribute("disciplina", new Disciplina());
-		model.addAttribute("usuario", retornarUsuario());
+		model.addAttribute("u", retornarUsuario());
 		return "disciplina/cadastroDisciplina";
 	}
 	

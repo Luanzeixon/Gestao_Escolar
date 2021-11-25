@@ -40,7 +40,7 @@ public class cadastroProfessorController {
 	@GetMapping("/cadastroProfessor")
 	public String entrarCadastroProfessor(ModelMap model) {
 		model.addAttribute("usuario", new Usuario());
-		model.addAttribute("usuario", retornarUsuario());
+		model.addAttribute("u", retornarUsuario());
 		return "usuario/cadastroProfessor";
 	}
 
