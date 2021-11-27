@@ -7,7 +7,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 import br.edu.ifrn.projetotcc.dominio.Arquivo;
 
@@ -38,6 +40,9 @@ private String email;
 
 @Column
 private String cpf;
+
+@Transient
+private String falta;
 
 @Override
 public int hashCode() {
@@ -123,6 +128,14 @@ public String getMatricula() {
 
 public void setMatricula(String matricula) {
 	this.matricula = matricula;
+}
+
+public String getFalta() {
+	return falta;
+}
+
+public void setFalta(String falta) {
+	this.falta = falta;
 }
 
 	

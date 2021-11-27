@@ -80,7 +80,7 @@ public class buscaDiarioProfessorController {
 	public String salvarFrequencia(Frequencia frequencia,
 			RedirectAttributes attr, ModelMap model) {
 			model.addAttribute("u", retornarUsuario());
-			
+		
 			frequenciaRepository.save(frequencia);
 			attr.addFlashAttribute("msgSucesso", "Frequencia salva");
 		

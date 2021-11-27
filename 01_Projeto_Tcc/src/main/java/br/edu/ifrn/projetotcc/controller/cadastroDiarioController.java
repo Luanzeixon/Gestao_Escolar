@@ -48,7 +48,7 @@ public class cadastroDiarioController {
 	@PostMapping("/salvar")
 	@Transactional(readOnly = false)
 	public String salvarCadastroEstudante(Diario diario, RedirectAttributes attr, ModelMap model) {
-		
+		model.addAttribute("u", retornarUsuario());
 		List<String> validacao = validarDados(diario);
 		
 		if(!validacao.isEmpty()) {

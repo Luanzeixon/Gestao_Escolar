@@ -2,12 +2,14 @@ package br.edu.ifrn.projetotcc.dominio;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -19,17 +21,14 @@ public class Frequencia {
 	private int id;
 	
 	@Column
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date data;
 	
 	@ManyToOne
 	private Diario diario;
 	
-	@ManyToOne
-	private Usuario aluno;
-	
-	@Column
-	private String falta;
+	@ManyToOne(cascade=CascadeType.PERSIST)
+	private Usuario estudante;
 
 	@Override
 	public int hashCode() {
@@ -61,12 +60,12 @@ public class Frequencia {
 		this.id = id;
 	}
 
-	public Usuario getAluno() {
-		return aluno;
+	public Usuario getEstudante() {
+		return estudante;
 	}
 
-	public void setAluno(Usuario aluno) {
-		this.aluno = aluno;
+	public void setEstudante(Usuario estudante) {
+		this.estudante = estudante;
 	}
 
 	public Diario getDiario() {
@@ -83,14 +82,6 @@ public class Frequencia {
 
 	public void setData(Date data) {
 		this.data = data;
-	}
-
-	public String getFalta() {
-		return falta;
-	}
-
-	public void setFalta(String falta) {
-		this.falta = falta;
 	}
 	
 	
