@@ -38,7 +38,7 @@ public class Diario {
 	@OneToMany
 	private List<Nota> nota;
 	
-	@OneToMany
+	@OneToMany(mappedBy = "diario")
 	private List<Frequencia> frequencia;
 
 	@Override

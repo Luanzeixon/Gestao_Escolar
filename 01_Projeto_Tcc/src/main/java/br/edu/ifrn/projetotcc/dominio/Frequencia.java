@@ -29,6 +29,9 @@ public class Frequencia {
 	
 	@ManyToOne(cascade=CascadeType.PERSIST)
 	private Usuario estudante;
+	
+	@Column
+	private String falta;
 
 	@Override
 	public int hashCode() {
@@ -83,6 +86,13 @@ public class Frequencia {
 	public void setData(Date data) {
 		this.data = data;
 	}
-	
+
+	public String getFalta() {
+		return falta;
+	}
+
+	public void setFalta(String falta) {
+		this.falta = falta;
+	}
 	
 }

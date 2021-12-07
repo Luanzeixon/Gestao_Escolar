@@ -24,11 +24,10 @@
 		<h3>Frequencia do dia:</h3>
 		<div th:replace="fragment/mensagens"></div>
 		<form th:action="@{/diariosProfessor/salvarFrequencia}"
-			th:object="${frequencia}" method="post" enctype="multipart/form-data">
-			<input type="date" th:field="${frequencia.data}" /> 
-			<input type="hidden" th:value="${diario}" th:field="${frequencia.diario}">
+			th:object="${frequencias}" method="post" enctype="multipart/form-data">
 			
-			<div th:if="${not #lists.isEmpty(usuariosEncontrados)}"
+			
+			<div th:if="${not #lists.isEmpty(frequencias)}"
 				class="table-wrapper-scroll-y my-custom-scrollbar">
 				<br />
 				
@@ -39,12 +38,9 @@
 						<th>Faltas</th>
 						<th>Opções</th>
 					</tr>
-					<tr th:each="u, itemStat : ${usuariosEncontrados}">
-						<input type="hidden" th:field="${diario.estudante[__${itemStat.index}__].id}" />
-						<td th:text="${u.nome}"></td>
-						<td style="width: 70px"><input
-							th:field="${diario.estudante[__${itemStat.index}__].falta}" class="form-control"
-							type="text" style="width: 50px"></td>
+					<tr th:each="u : ${frequencias}">
+						<td th:text="${u.estudante.nome}"></td>
+						<td style="width: 70px"><input th:field="${frequencias.estudante.falta}"></td>
 						<td></td>
 					</tr>
 				</table>
