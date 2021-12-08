@@ -24,7 +24,7 @@
 		<h3>Frequencia do dia:</h3>
 		<div th:replace="fragment/mensagens"></div>
 		<form th:action="@{/diariosProfessor/salvarFrequencia}"
-			th:object="${frequencias}" method="post" enctype="multipart/form-data">
+			th:object="${form}" method="post" enctype="multipart/form-data">
 			
 			
 			<div th:if="${not #lists.isEmpty(frequencias)}"
@@ -38,9 +38,9 @@
 						<th>Faltas</th>
 						<th>Opções</th>
 					</tr>
-					<tr th:each="u : ${frequencias}">
-						<td th:text="${u.estudante.nome}"></td>
-						<td style="width: 70px"><input th:field="${frequencias.estudante.falta}"></td>
+					<tr th:each="f, itemStat : *{frequencias}">
+						<td><input th:field="*{frequencias[__${itemStat.index}__].estudante.nome}" /></td>
+						<td style="width: 70px"><input th:field="${}"></td>
 						<td></td>
 					</tr>
 				</table>

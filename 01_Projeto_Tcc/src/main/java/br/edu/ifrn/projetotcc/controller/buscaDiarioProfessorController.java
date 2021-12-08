@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.edu.ifrn.projetotcc.DTO.FrequenciaCreationDTO;
 import br.edu.ifrn.projetotcc.dominio.Diario;
 import br.edu.ifrn.projetotcc.dominio.Frequencia;
 import br.edu.ifrn.projetotcc.dominio.Usuario;
@@ -69,6 +70,9 @@ public class buscaDiarioProfessorController {
 
 		// Criando uma lista de frequências a ser enviada para a página
 		List<Frequencia> frequencias = new ArrayList<Frequencia>();
+		
+		// Para vincular lista no thymeleaf
+		FrequenciaCreationDTO frequenciasForm = new FrequenciaCreationDTO();
 
 		for (int i = 0; i < alunosDiario.size(); i++) {
 			Usuario u = alunosDiario.get(i);
@@ -76,8 +80,10 @@ public class buscaDiarioProfessorController {
 			Frequencia f = new Frequencia();
 			f.setDiario(d);
 			f.setEstudante(u);
+			frequenciasForm.addFrequencia(f);
 		}
-
+		
+		model.addAttribute("form", frequenciasForm);
 		model.addAttribute("frequencias", frequencias);
 
 		return "usuario/professor/paginaFrequencia";
