@@ -79,14 +79,6 @@ public class Frequencia {
 		this.diario = diario;
 	}
 
-	public Date getData() {
-		return data;
-	}
-
-	public void setData(Date data) {
-		this.data = data;
-	}
-
 	public String getFalta() {
 		return falta;
 	}
@@ -94,5 +86,15 @@ public class Frequencia {
 	public void setFalta(String falta) {
 		this.falta = falta;
 	}
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+	
+	
 	
 }
