@@ -39,11 +39,13 @@
 						<th>Data</th>
 					</tr>
 					<tr th:each="f, itemStat : *{frequencias}">
-						<td th:text="*{frequencias[__${itemStat.index}__].estudante.nome}"></td>
-						<td style="width: 70px"><input th:field="*{frequencias[__${itemStat.index}__].falta}"></td>
-						<td style="width: 70px"><input type="date" th:field="*{frequencias[__${itemStat.index}__].data}"></td>
+						<td th:text="*{frequencias[__${itemStat.index}__].estudante.nome}" class="form-control"></td>
+						<td style="width: 50px"><input style="width: 50px" class="form-control" 
+						th:field="*{frequencias[__${itemStat.index}__].falta}"></td>
+						<td><input type="date" th:field="*{frequencias[__${itemStat.index}__].data}"></td>
 						<input type="hidden" th:field="*{frequencias[__${itemStat.index}__].diario}">
 						<input type="hidden" th:field="*{frequencias[__${itemStat.index}__].estudante}">
+						<input type="hidden" th:field="*{frequencias[__${itemStat.index}__].id}">
 					</tr>
 				</table>
 			</div>

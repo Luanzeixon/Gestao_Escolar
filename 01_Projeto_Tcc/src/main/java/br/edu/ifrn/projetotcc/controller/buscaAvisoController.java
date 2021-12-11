@@ -33,7 +33,7 @@ public class buscaAvisoController {
 	
 	@GetMapping("/buscaAvisos")
 	public String entrarBuscaDisciplina(ModelMap model){
-		model.addAttribute("usuario", retornarUsuario());
+		model.addAttribute("u", retornarUsuario());
 		return "usuario/secretario/buscaAviso";
 	}
 	
@@ -54,7 +54,7 @@ public class buscaAvisoController {
 	
 	@GetMapping("/remover/{id}")
 	public String iniciarRemocao(@PathVariable("id") Integer idAviso, RedirectAttributes attr, ModelMap model) {
-		model.addAttribute("usuario", retornarUsuario());
+		model.addAttribute("u", retornarUsuario());
 		
 		avisoRepository.deleteById(idAviso);
 		attr.addFlashAttribute("msgSucesso", "Aviso removido com sucesso");
@@ -64,7 +64,7 @@ public class buscaAvisoController {
 	
 	@GetMapping("/editar/{id}")
 	public String iniciarEdicao(@PathVariable("id") Integer idAviso, ModelMap model ) {
-		model.addAttribute("usuario", retornarUsuario());
+		model.addAttribute("u", retornarUsuario());
 		
 		Aviso a = avisoRepository.findById(idAviso).get();
 		
