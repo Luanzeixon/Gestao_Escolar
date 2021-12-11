@@ -26,7 +26,7 @@
 		<form th:action="@{/diariosProfessor/salvarFrequencia}"
 			th:object="${form}" method="post" enctype="multipart/form-data">
 			
-			
+			<input type="date" th:name="data">
 			<div th:if="${not #lists.isEmpty(form.frequencias)}"
 				class="table-wrapper-scroll-y my-custom-scrollbar">
 				<br />
@@ -42,7 +42,7 @@
 						<td th:text="*{frequencias[__${itemStat.index}__].estudante.nome}" class="form-control"></td>
 						<td style="width: 50px"><input style="width: 50px" class="form-control" 
 						th:field="*{frequencias[__${itemStat.index}__].falta}"></td>
-						<td><input type="date" th:field="*{frequencias[__${itemStat.index}__].data}"></td>
+						<input type="hidden" th:field="*{frequencias[__${itemStat.index}__].data}">
 						<input type="hidden" th:field="*{frequencias[__${itemStat.index}__].diario}">
 						<input type="hidden" th:field="*{frequencias[__${itemStat.index}__].estudante}">
 						<input type="hidden" th:field="*{frequencias[__${itemStat.index}__].id}">

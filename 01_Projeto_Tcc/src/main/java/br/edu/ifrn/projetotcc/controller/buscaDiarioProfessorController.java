@@ -93,12 +93,25 @@ public class buscaDiarioProfessorController {
 
 	@PostMapping("/salvarFrequencia")
 	public String salvarFrequencia(FrequenciaCreationDTO frequencias, RedirectAttributes attr, 
-			ModelMap model /*, @RequestParam("data") Date data*/) {
+			ModelMap model , @RequestParam("data") String data) {
+		
 		model.addAttribute("u", retornarUsuario());
 		
-		/*for (int i = 0; i < frequencias.getFrequencias().size(); i++) {
-			frequencias.getFrequencias().get(i).setData(data);
-		}*/
+		//Falar que formato é a data...
+		SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd"); 
+		
+		Date dataFormatada;
+		try {
+			//...passar de string para data...
+			dataFormatada = formato.parse(data);
+			
+			//...percorrer todas as frequencias e setar pra essa data
+			for (int i = 0; i < frequencias.getFrequencias().size(); i++) {
+				frequencias.getFrequencias().get(i).setData(dataFormatada);
+			}
+		} catch (ParseException e) {
+			e.printStackTrace();
+		} 
 		
 		frequenciaRepository.saveAll(frequencias.getFrequencias());
 		attr.addFlashAttribute("msgSucesso", "Frequencias salvas");
