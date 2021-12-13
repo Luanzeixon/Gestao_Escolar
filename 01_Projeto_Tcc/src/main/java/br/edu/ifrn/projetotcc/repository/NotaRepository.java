@@ -14,6 +14,6 @@ import br.edu.ifrn.projetotcc.dominio.Nota;
 
 public interface NotaRepository extends JpaRepository<Nota,Integer> {
 	
-	@Query("select f from Frequencia f where f.estudante.nome like %:estudante%") 
+	@Query("select n from Nota n where n.estudante.nome like %:estudante%") 
 	List<Frequencia> findByAluno(@Param("estudante") String estudante);
 }

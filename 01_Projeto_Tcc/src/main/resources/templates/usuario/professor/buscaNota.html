@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt" layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<section layout:fragment="corpo">
+<style>
+.btn-primary {
+	display: inline-block;
+	background-color: #000;
+	background-image: linear-gradient(125deg, #3ce7d9, #064497);
+	color: #fff;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-size: 16px;
+	padding: 8px 16px;
+	border: none;
+	width: 200px;
+	cursor: pointer;
+}
+
+</style>
+	<div th:replace="fragment/mensagens"></div>
+	<form th:action="@{/frequencias/buscar}" method="get">
+	<h3>Buscar Frequencia</h3>
+		<table>
+			<tr>
+				<td>Nome do Aluno: </td>
+				<td><input class="form-control" type="text" th:name="estudante"></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input class="btn btn-primary" type="submit" value="buscar" /> <input
+					class="btn btn-primary" type="submit" value="voltar" formaction="/diarios" formmethod="get" />
+				</td>
+			</tr>			
+		</table>
+		<hr>
+	</form>
+	<br/>
+	<div th:if="${not #lists.isEmpty(notasEncontradas)}" class="table-wrapper-scroll-y my-custom-scrollbar">
+		<table class="table table-bordered table-striped mb-0">
+			<tr style="color: white; background-image: linear-gradient(125deg, #3ce7d9, #064497);">
+				<th>Aluno</th>
+				<th>Bimestre</th>
+				<th>Diario</th>
+				<th>Falta</th>
+				<th>Opções</th>
+			</tr>
+			<tr th:each="n : ${notasEncontradas}">
+				<td th:text="${n.estudante.nome}"></td>
+				<td th:text="${n.bimestre}"></td>
+				<td th:text="${n.diario.nome}"></td>
+				<td style="text-align: center" th:text="${n.nota}"></td>
+				<td><a th:href="'/notas/editar/' + ${f.id}">  <i
+							class='bx bx-edit'></i></a> <a
+					th:href="'/notas/remover/' + ${n.id}"
+					onclick="if(!confirm('Deseja realmente remover a Aviso?')) return false; ">
+						<i class='bx bx-trash'></i> </a></td>
+			</tr>
+		</table>
+	</div>
+</section>
+</body>
+</html>
