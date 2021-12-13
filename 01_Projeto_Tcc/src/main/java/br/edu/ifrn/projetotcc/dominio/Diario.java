@@ -35,7 +35,7 @@ public class Diario {
 	@ManyToOne
 	private Disciplina disciplina;
 	
-	@OneToMany
+	@OneToMany(mappedBy = "diario")
 	private List<Nota> nota;
 	
 	@OneToMany(mappedBy = "diario")

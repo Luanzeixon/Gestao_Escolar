@@ -21,6 +21,7 @@
 	cursor: pointer;
 }
 </style>
+		<br>
 		<h3>Frequencia do dia:</h3>
 		<div th:replace="fragment/mensagens"></div>
 		<form th:action="@{/diariosProfessor/salvarFrequencia}"
@@ -36,7 +37,6 @@
 						style="color: white; background-image: linear-gradient(125deg, #064497, #3ce7d9);">
 						<th>Nome do Estudante</th>
 						<th>Faltas</th>
-						<th>Data</th>
 					</tr>
 					<tr th:each="f, itemStat : *{frequencias}">
 						<td th:text="*{frequencias[__${itemStat.index}__].estudante.nome}" class="form-control"></td>

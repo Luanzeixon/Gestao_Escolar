@@ -1,5 +1,6 @@
 package br.edu.ifrn.projetotcc.dominio;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,16 +16,16 @@ public class Nota {
 	private int id;
 	
 	@Column
-	private double nota1;
+	private float nota;
 	
 	@Column
-	private double nota2;
+	private int bimestre;
 	
 	@ManyToOne
 	private Diario diario;
 	
-	@ManyToOne
-	private Usuario aluno;
+	@ManyToOne(cascade=CascadeType.PERSIST)
+	private Usuario estudante;
 
 	@Override
 	public int hashCode() {
@@ -56,28 +57,20 @@ public class Nota {
 		this.id = id;
 	}
 
-	public double getNota1() {
-		return nota1;
+	public float getNota() {
+		return nota;
 	}
 
-	public void setNota1(double nota1) {
-		this.nota1 = nota1;
+	public void setNota(float nota) {
+		this.nota = nota;
 	}
 
-	public double getNota2() {
-		return nota2;
+	public Usuario getEstudante() {
+		return estudante;
 	}
 
-	public void setNota2(double nota2) {
-		this.nota2 = nota2;
-	}
-
-	public Usuario getAluno() {
-		return aluno;
-	}
-
-	public void setAluno(Usuario aluno) {
-		this.aluno = aluno;
+	public void setEstudante(Usuario estudante) {
+		this.estudante = estudante;
 	}
 
 	public Diario getDiario() {
@@ -87,6 +80,13 @@ public class Nota {
 	public void setDiario(Diario diario) {
 		this.diario = diario;
 	}
-	
+
+	public int getBimestre() {
+		return bimestre;
+	}
+
+	public void setBimestre(int bimestre) {
+		this.bimestre = bimestre;
+	}
 	
 }

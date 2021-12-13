@@ -50,6 +50,7 @@ public class buscaFrequenciaController {
 	@GetMapping("/buscar")
 	@Transactional(readOnly = false)
 	public String buscar(@RequestParam(name = "estudante", required = false) String estudante,
+			@RequestParam(name = "data", required = false) String data,
 			ModelMap model) {
 		
 		model.addAttribute("u", retornarUsuario());

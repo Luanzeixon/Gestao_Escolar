@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt" layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<section layout:fragment="corpo">
+		<style>
+.btn-primary {
+	display: inline-block;
+	background-color: #000;
+	background-image: linear-gradient(125deg, #064497, #3ce7d9);
+	color: #fff;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-size: 16px;
+	padding: 8px 16px;
+	border: none;
+	width: 200px;
+	cursor: pointer;
+}
+</style>
+		<br>
+		<h3>Nota do bimestre:</h3>
+		<div th:replace="fragment/mensagens"></div>
+		<form th:action="@{/diariosProfessor/salvarNota}" th:object="${form}"
+			method="post" enctype="multipart/form-data">
+		
+			<select class="form-control" th:name="select">
+				<option th:value="0" selected>Escolha Bimestre</option>
+				<option th:value="1">1 Bimestre</option>
+				<option th:value="2" >2 Bimestre</option>
+				<option th:value="3">3 Bimestre</option>
+				<option th:value="4">4 Bimestre</option>
+			</select>
+
+			<div th:if="${not #lists.isEmpty(form.notas)}"
+				class="table-wrapper-scroll-y my-custom-scrollbar">
+				<br />
+
+				<table class="table table-bordered table-striped mb-0">
+					<tr
+						style="color: white; background-image: linear-gradient(125deg, #064497, #3ce7d9);">
+						<th>Nome do Estudante</th>
+						<th>Nota</th>
+						
+					</tr>
+					<tr th:each="f, itemStat : *{notas}">
+						<td th:text="*{notas[__${itemStat.index}__].estudante.nome}"
+							class="form-control"></td>
+						<td style="width: 100px"><input style="width: 100px"
+							class="form-control"
+							th:field="*{notas[__${itemStat.index}__].nota}"></td>
+
+						<input type="hidden"
+							th:field="*{notas[__${itemStat.index}__].diario}">
+						<input type="hidden"
+							th:field="*{notas[__${itemStat.index}__].estudante}">
+						<input type="hidden" th:field="*{notas[__${itemStat.index}__].id}">
+					</tr>
+				</table>
+			</div>
+			<br> <input type="submit" class="btn btn-primary" value="Salvar">
+		</form>
+	</section>
+
+</body>
+</html>

@@ -43,7 +43,7 @@ public class cadastroAvisosControlller {
 		List<String> validacao = validarDados(aviso);
 		
 		if(!validacao.isEmpty()) {
-			model.addAttribute("usuario", retornarUsuario());
+			model.addAttribute("u", retornarUsuario());
 			model.addAttribute("msgErro",validacao);
 			return "usuario/secretario/cadastroAviso";
 		}
