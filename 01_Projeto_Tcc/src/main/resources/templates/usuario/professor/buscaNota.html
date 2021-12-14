@@ -23,8 +23,8 @@
 
 </style>
 	<div th:replace="fragment/mensagens"></div>
-	<form th:action="@{/frequencias/buscar}" method="get">
-	<h3>Buscar Frequencia</h3>
+	<form th:action="@{/notas/buscar}" method="get">
+	<h3>Buscar Nota</h3>
 		<table>
 			<tr>
 				<td>Nome do Aluno: </td>
@@ -54,7 +54,7 @@
 				<td th:text="${n.bimestre}"></td>
 				<td th:text="${n.diario.nome}"></td>
 				<td style="text-align: center" th:text="${n.nota}"></td>
-				<td><a th:href="'/notas/editar/' + ${f.id}">  <i
+				<td><a th:href="'/notas/editar/' + ${n.id}">  <i
 							class='bx bx-edit'></i></a> <a
 					th:href="'/notas/remover/' + ${n.id}"
 					onclick="if(!confirm('Deseja realmente remover a Aviso?')) return false; ">

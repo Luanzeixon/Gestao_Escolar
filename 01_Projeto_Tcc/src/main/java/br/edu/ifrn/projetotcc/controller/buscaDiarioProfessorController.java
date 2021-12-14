@@ -154,19 +154,23 @@ public class buscaDiarioProfessorController {
 	}
 
 	@PostMapping("/salvarNota")
-	public String salvarNota(NotaCreationDTO notas, RedirectAttributes attr, ModelMap model) {
-
+	public String salvarNota(NotaCreationDTO notas, RedirectAttributes attr, 
+			ModelMap model, @RequestParam("select") String bimestre) {
+	
 		model.addAttribute("u", retornarUsuario());
 		
-				for(int i = 0; i < notas.getNotas().size(); i++) {
-					List<String> validacao = validarDados(notas.getNotas().get(i));
-					if(!validacao.isEmpty()) {
-						model.addAttribute("u", retornarUsuario());
-						model.addAttribute("msgErro",validacao);
-						return "usuario/professor/paginaNota";
-					}
-				}
-				
+		int valorB = Integer.parseInt(bimestre);
+		for(int i = 0; i < notas.getNotas().size(); i++) {
+			notas.getNotas().get(i).setBimestre(valorB);
+			
+			List<String> validacao = validarDados(notas.getNotas().get(i));
+			if(!validacao.isEmpty()) {
+				model.addAttribute("u", retornarUsuario());
+				model.addAttribute("msgErro",validacao);
+				model.addAttribute("form", notas);
+				return "usuario/professor/paginaNota";
+			}
+		}		
 		
 		notaRepository.saveAll(notas.getNotas());
 		attr.addFlashAttribute("msgSucesso", "Notas salvas");

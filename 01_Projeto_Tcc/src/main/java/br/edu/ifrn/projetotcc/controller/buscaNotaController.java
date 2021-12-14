@@ -47,19 +47,18 @@ public class buscaNotaController {
 	@GetMapping("/buscaNotas")
 	public String entrarBuscaDisciplina(ModelMap model){
 		model.addAttribute("u", retornarUsuario());
-		return "usuario/professor/buscaFrequencia";
+		return "usuario/professor/buscaNota";
 	}
 	
 	@GetMapping("/buscar")
 	@Transactional(readOnly = false)
 	public String buscar(@RequestParam(name = "estudante", required = false) String estudante,
-			@RequestParam(name = "data", required = false) String data,
 			ModelMap model) {
 		
 		model.addAttribute("u", retornarUsuario());
 		
-		List<Frequencia> todasNotas = notaRepository.findByAluno(estudante);
-		List<Frequencia> notasEncontradas = new ArrayList<>();
+		List<Nota> todasNotas = notaRepository.findByAluno(estudante);
+		List<Nota> notasEncontradas = new ArrayList<>();
 		
 		List<Diario> diariosProfessor = diarioRepository.findByProfessor(retornarUsuario().getNome());
 		
@@ -71,17 +70,17 @@ public class buscaNotaController {
 			}
 		}
 		
-		model.addAttribute("frequenciasEncontradas",notasEncontradas);
+		model.addAttribute("notasEncontradas",notasEncontradas);
 		
 				return "usuario/professor/buscaNota";
 		
 	}
 	
 	@GetMapping("/remover/{id}")
-	public String iniciarRemocao(@PathVariable("id") Integer idFrequencia, RedirectAttributes attr, ModelMap model) {
+	public String iniciarRemocao(@PathVariable("id") Integer idNota, RedirectAttributes attr, ModelMap model) {
 		model.addAttribute("u", retornarUsuario());
 		
-		notaRepository.deleteById(idFrequencia);
+		notaRepository.deleteById(idNota);
 		
 		attr.addFlashAttribute("msgSucesso", "Nota removida com sucesso");
 
