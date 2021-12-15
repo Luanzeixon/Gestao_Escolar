@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt" layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<section layout:fragment="corpo">
+		<style>
+.btn-primary {
+	display: inline-block;
+	background-color: #000;
+	background-image: linear-gradient(125deg, #064497, #3ce7d9);
+	color: #fff;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-size: 16px;
+	padding: 8px 16px;
+	border: none;
+	width: 200px;
+	cursor: pointer;
+}
+</style>
+		<br>
+		<h3>Boletim</h3>
+		<div th:replace="fragment/mensagens"></div>
+
+			<div th:if="${not #lists.isEmpty(notas)}"
+				class="table-wrapper-scroll-y my-custom-scrollbar">
+				<br />
+
+				<table class="table table-bordered table-striped mb-0">
+					<tr
+						style="color: white; background-image: linear-gradient(125deg, #064497, #3ce7d9);">
+						<th>Nome do Estudante</th>
+						<th>Media</th>
+						<th>Situação</th>
+					</tr>
+					<tr th:each="f, itemStat : *{estudante}">
+						<td th:text="*{diarios.estudante[__${itemStat.index}__].nome}" class="form-control"></td>
+						<td th:text="*{diarios.estudante[__${itemStat.index}__].media}"></td>
+						<td th:text="*{diarios.estudante[__${itemStat.index}__].situacao}"></td>
+					</tr>
+				</table>
+			</div>
+			<br> <a th:href="@{/diarios}"><button class="btn btn-primary">Voltar</button></a>
+	</section>
+
+</body>
+</html>

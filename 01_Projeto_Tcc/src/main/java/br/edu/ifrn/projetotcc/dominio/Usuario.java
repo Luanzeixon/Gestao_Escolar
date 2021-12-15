@@ -44,6 +44,12 @@ private String cpf;
 @Transient
 private String falta;
 
+@Transient
+private String situacao;
+
+@Transient
+private float media;
+
 @Override
 public int hashCode() {
 	final int prime = 31;
@@ -138,5 +144,20 @@ public void setFalta(String falta) {
 	this.falta = falta;
 }
 
+public String getSituacao() {
+	return situacao;
+}
+
+public void setSituacao(String situacao) {
+	this.situacao = situacao;
+}
+
+public float getMedia() {
+	return media;
+}
+
+public void setMedia(float media) {
+	this.media = media;
+}
 	
 }

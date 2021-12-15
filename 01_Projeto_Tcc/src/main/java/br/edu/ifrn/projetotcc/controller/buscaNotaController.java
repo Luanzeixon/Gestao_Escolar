@@ -92,11 +92,11 @@ public class buscaNotaController {
 		model.addAttribute("u", retornarUsuario());
 		
 		Nota n = notaRepository.findById(idNota).get();
-		NotaCreationDTO frequenciasForm = new NotaCreationDTO();
-		frequenciasForm.addNota(n);
+		NotaCreationDTO notasForm = new NotaCreationDTO();
+		notasForm.addNota(n);
 		
-		model.addAttribute("form", frequenciasForm);
-		model.addAttribute("frequencias", n); 
+		model.addAttribute("form", notasForm);
+		model.addAttribute("notas", n); 
 		 
 		return "usuario/professor/paginaNota";
 	}

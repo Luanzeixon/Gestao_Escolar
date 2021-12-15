@@ -46,6 +46,7 @@
 				<th>Nome</th>
 				<th>Colocar Frequencias</th>
 				<th>Colocar Notas</th>
+				<th>Boletins<th>
 			</tr>
 			<tr th:each="t : ${diariosEncontrados}">
 				<td th:text="${t.nome}"></td>
@@ -56,6 +57,10 @@
 					<td><a th:href="'/diariosProfessor/nota/' + ${t.id}"> <i
 							class='bx bx-edit'></i>
 					</a></td>
+					<td><a th:href="'/diariosProfessor/boletim/' + ${t.id}"> <i
+							class='bx bx-edit'></i>
+					</a></td>
+					<td></td>
 			</tr>
 		</table>
 	</div>

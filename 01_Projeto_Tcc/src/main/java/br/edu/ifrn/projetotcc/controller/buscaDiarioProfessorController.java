@@ -156,14 +156,22 @@ public class buscaDiarioProfessorController {
 	@PostMapping("/salvarNota")
 	public String salvarNota(NotaCreationDTO notas, RedirectAttributes attr, 
 			ModelMap model, @RequestParam("select") String bimestre) {
-	
-		model.addAttribute("u", retornarUsuario());
 		
+		model.addAttribute("u", retornarUsuario());
 		int valorB = Integer.parseInt(bimestre);
+		List<Nota> n = new ArrayList<>();
+			
+		
 		for(int i = 0; i < notas.getNotas().size(); i++) {
 			notas.getNotas().get(i).setBimestre(valorB);
-			
 			List<String> validacao = validarDados(notas.getNotas().get(i));
+			
+			n = notaRepository.findByBimestreAndDiario(valorB,notas.getNotas().get(i).getDiario().getId());
+				if(n.size() >= 0) {
+				    n.get(i).setNota(notas.getNotas().get(i).getNota())	;
+					
+				}
+				
 			if(!validacao.isEmpty()) {
 				model.addAttribute("u", retornarUsuario());
 				model.addAttribute("msgErro",validacao);
@@ -171,11 +179,44 @@ public class buscaDiarioProfessorController {
 				return "usuario/professor/paginaNota";
 			}
 		}		
-		
+		notas.setNotas(n);
 		notaRepository.saveAll(notas.getNotas());
 		attr.addFlashAttribute("msgSucesso", "Notas salvas");
 
 		return "redirect:/diariosProfessor/busca";
+	}
+	
+	@GetMapping("/boletim/{id}")
+	public String boletim(@PathVariable("id") Integer idDiario, ModelMap model) {
+		model.addAttribute("u", retornarUsuario());
+		
+		Diario d = diarioRepository.findById(idDiario).get();
+		
+		List<Nota> notas = notaRepository.findByDiario(d.getId());
+		List<Usuario> alunosDiario = d.getEstudante();
+		
+		for(int i = 0; i < alunosDiario.size(); i++) {
+			float soma = 0;
+			List<Nota> enotas = notaRepository.findByAluno(alunosDiario.get(i).getNome());
+			for(int j = 0; j < enotas.size(); j++) {
+				soma = soma + enotas.get(j).getNota();
+			}
+			alunosDiario.get(i).setMedia(soma);
+			if(soma >= 24.0) {
+				alunosDiario.get(i).setSituacao("Aprovado");
+			}if(soma <= 24.0) {
+				if(soma + 10.0 >= 24.0) {
+					alunosDiario.get(i).setSituacao("Recuperação");
+				}else {
+					alunosDiario.get(i).setSituacao("Reprovado");
+				}
+			}
+		}
+		
+		model.addAttribute("notas", notas);
+		model.addAttribute("diarios", d);
+		model.addAttribute("estudante", alunosDiario);
+		return "usuario/professor/paginaBoletim";
 	}
 
 	public Usuario retornarUsuario() {
