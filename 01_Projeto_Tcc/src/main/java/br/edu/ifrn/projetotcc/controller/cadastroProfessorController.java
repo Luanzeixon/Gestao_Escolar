@@ -48,6 +48,7 @@ public class cadastroProfessorController {
 	@Transactional(readOnly = false)
 	public String salvarCadastroEstudante(Usuario usuario, RedirectAttributes attr,
 			@RequestParam("file") MultipartFile arquivo, ModelMap model) {
+		model.addAttribute("u", retornarUsuario());
 		try {
 			List<String> validacao = validarDados(usuario);
 			if(!validacao.isEmpty()) {

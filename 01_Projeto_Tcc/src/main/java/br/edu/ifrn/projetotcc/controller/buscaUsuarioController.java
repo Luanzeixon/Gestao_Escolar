@@ -56,8 +56,8 @@ public class buscaUsuarioController {
 	}
 	
 	@GetMapping("/remover/{id}")
-	public String iniciarRemocao(@PathVariable("id") Integer idUsuario, RedirectAttributes attr) {
-
+	public String iniciarRemocao(@PathVariable("id") Integer idUsuario, RedirectAttributes attr, ModelMap model) {
+		model.addAttribute("u", retornarUsuario());
 		usuarioRepository.deleteById(idUsuario);
 		attr.addFlashAttribute("msgSucesso", "Usuario removido com sucesso");
 
@@ -66,7 +66,7 @@ public class buscaUsuarioController {
 	
 	@GetMapping("/editar/{id}")
 	public String iniciarEdicao(@PathVariable("id") Integer idUsuario, ModelMap model ) {
-		
+		model.addAttribute("u", retornarUsuario());
 		Usuario u = usuarioRepository.findById(idUsuario).get();
 		
 		model.addAttribute("usuario", u); 
@@ -90,7 +90,7 @@ public class buscaUsuarioController {
 	@PostMapping("/filtrar")
 	public String filtrar(@RequestParam("tipo") String tipo, ModelMap model,
 			Boolean mostrarTodosDados) {
-		
+		model.addAttribute("u", retornarUsuario());
 		List<Usuario> usuariosEncontrados = usuarioRepository.findByTipo(tipo);
 		
 		model.addAttribute("usuariosEncontrados", usuariosEncontrados);

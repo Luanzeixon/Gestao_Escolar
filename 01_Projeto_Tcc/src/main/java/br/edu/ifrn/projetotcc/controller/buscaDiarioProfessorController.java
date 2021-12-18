@@ -167,7 +167,7 @@ public class buscaDiarioProfessorController {
 			List<String> validacao = validarDados(notas.getNotas().get(i));
 			
 			n = notaRepository.findByBimestreAndDiario(valorB,notas.getNotas().get(i).getDiario().getId());
-				if(n.size() >= 0) {
+				if(n.size() > 0) {
 				    n.get(i).setNota(notas.getNotas().get(i).getNota())	;
 					
 				}
@@ -178,8 +178,12 @@ public class buscaDiarioProfessorController {
 				model.addAttribute("form", notas);
 				return "usuario/professor/paginaNota";
 			}
-		}		
-		notas.setNotas(n);
+		}
+		
+		if(n.size() > 0) {
+			notas.setNotas(n);
+		}
+		
 		notaRepository.saveAll(notas.getNotas());
 		attr.addFlashAttribute("msgSucesso", "Notas salvas");
 

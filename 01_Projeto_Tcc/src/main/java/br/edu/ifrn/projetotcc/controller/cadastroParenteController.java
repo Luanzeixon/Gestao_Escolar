@@ -48,6 +48,7 @@ public class cadastroParenteController {
 	@Transactional(readOnly = false)
 	public String salvarCadastroParente(Usuario usuario, RedirectAttributes attr,
 			@RequestParam("file") MultipartFile arquivo, ModelMap model) {
+		model.addAttribute("u", retornarUsuario());
 
 		try {
 			List<String> validacao = validarDados(usuario);

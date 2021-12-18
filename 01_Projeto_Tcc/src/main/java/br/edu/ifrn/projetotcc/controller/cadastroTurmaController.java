@@ -45,6 +45,7 @@ public class cadastroTurmaController {
 	@Transactional(readOnly = false)
 	public String salvarCadastroTurma(Turma turma, RedirectAttributes attr, ModelMap model) {
 		List<String> validacao = validarDados(turma);
+		model.addAttribute("u", retornarUsuario());
 		if(!validacao.isEmpty()) {
 			model.addAttribute("msgErro",validacao);
 			return "/turma/cadastroTurma";

@@ -50,6 +50,7 @@ public class cadastroSecretarioController {
 	@Transactional(readOnly = false)
 	public String salvarCadastroSecretario(Usuario usuario, RedirectAttributes attr, 
 			@RequestParam("file") MultipartFile arquivo, ModelMap model) {
+		model.addAttribute("u", retornarUsuario());
 		try {
 			
 			List<String> validacao = validarDados(usuario);
