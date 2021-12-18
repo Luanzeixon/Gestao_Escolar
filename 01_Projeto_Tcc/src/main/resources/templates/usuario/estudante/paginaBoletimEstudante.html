@@ -31,14 +31,22 @@
 				<table class="table table-bordered table-striped mb-0">
 					<tr
 						style="color: white; background-image: linear-gradient(125deg, #064497, #3ce7d9);">
-						<th>Nome do Estudante</th>
-						<th>Nota</th>
+						<th>Materia</th>
+						<th>Nota 1 bimestre</th>
+						<th>Nota 2 bimestre</th>
+						<th>Nota 3 bimestre</th>
+						<th>Nota 4 bimestre</th>
 						
 					</tr>
+					
 					<tr th:each="f, itemStat : *{diarios}">
+					
 						<td th:text="*{diarios[__${itemStat.index}__].disciplina.nome}"
 							class="form-control"></td>
-						<td style="width: 100px"></td>
+							
+							
+						
+						
 
 					</tr>
 				</table>

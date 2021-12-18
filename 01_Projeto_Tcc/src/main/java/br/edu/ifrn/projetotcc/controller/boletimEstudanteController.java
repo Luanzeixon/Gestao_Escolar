@@ -1,5 +1,6 @@
 package br.edu.ifrn.projetotcc.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.edu.ifrn.projetotcc.dominio.Diario;
+import br.edu.ifrn.projetotcc.dominio.Nota;
 import br.edu.ifrn.projetotcc.dominio.Usuario;
 import br.edu.ifrn.projetotcc.repository.DiarioRepository;
 import br.edu.ifrn.projetotcc.repository.FrequenciaRepository;
@@ -18,7 +20,7 @@ import br.edu.ifrn.projetotcc.repository.NotaRepository;
 import br.edu.ifrn.projetotcc.repository.UsuarioRepository;
 
 @Controller
-@RequestMapping("boletins")
+@RequestMapping("/boletins")
 public class boletimEstudanteController {
 	
 	@Autowired
@@ -33,13 +35,14 @@ public class boletimEstudanteController {
 	@Autowired
 	private NotaRepository notaRepository;
 	
-	@GetMapping("busca")
+	@GetMapping("/busca")
 	public String entrarBuscaBoletim(ModelMap model) {
 		model.addAttribute("u", retornarUsuario());
 		
 		List<Diario> diarios =  diarioRepository.findByEstudante(retornarUsuario().getId());
 		
 		
+		model.addAttribute("diarios", diarios);
 		
 		return "/usuario/estudante/paginaBoletimEstudante";
 	}
