@@ -50,8 +50,8 @@ public class buscaDiarioController {
 	}
 	
 	@GetMapping("/remover/{id}")
-	public String iniciarRemocao(@PathVariable("id") Integer idDiario, RedirectAttributes attr) {
-
+	public String iniciarRemocao(@PathVariable("id") Integer idDiario, RedirectAttributes attr, ModelMap model ) {
+		model.addAttribute("u", retornarUsuario());
 		diarioRepository.deleteById(idDiario);
 		attr.addFlashAttribute("msgSucesso", "Diario removido com sucesso");
 

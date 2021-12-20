@@ -129,7 +129,7 @@ public class buscaDiarioProfessorController {
 	@GetMapping("/nota/{id}")
 	public String nota(@PathVariable("id") Integer idDiario, ModelMap model) {
 		model.addAttribute("u", retornarUsuario());
-		
+
 		Diario d = diarioRepository.findById(idDiario).get();
 
 		List<Usuario> alunosDiario = d.getEstudante();
@@ -154,69 +154,73 @@ public class buscaDiarioProfessorController {
 	}
 
 	@PostMapping("/salvarNota")
-	public String salvarNota(NotaCreationDTO notas, RedirectAttributes attr, 
-			ModelMap model, @RequestParam("select") String bimestre) {
-		
+	public String salvarNota(NotaCreationDTO notas, RedirectAttributes attr, ModelMap model,
+			@RequestParam("select") String bimestre) {
+
 		model.addAttribute("u", retornarUsuario());
 		int valorB = Integer.parseInt(bimestre);
 		List<Nota> n = new ArrayList<>();
-			
-		
-		for(int i = 0; i < notas.getNotas().size(); i++) {
+
+		for (int i = 0; i < notas.getNotas().size(); i++) {
 			notas.getNotas().get(i).setBimestre(valorB);
 			List<String> validacao = validarDados(notas.getNotas().get(i));
-			
-			n = notaRepository.findByBimestreAndDiario(valorB,notas.getNotas().get(i).getDiario().getId());
-				if(n.size() > 0) {
-				    n.get(i).setNota(notas.getNotas().get(i).getNota())	;
-					
-				}
-				
-			if(!validacao.isEmpty()) {
+
+			n = notaRepository.findByBimestreAndDiario(valorB, notas.getNotas().get(i).getDiario().getId());
+			if (n.size() > 0) {
+				n.get(i).setNota(notas.getNotas().get(i).getNota());
+
+			}
+
+			if (!validacao.isEmpty()) {
 				model.addAttribute("u", retornarUsuario());
-				model.addAttribute("msgErro",validacao);
+				model.addAttribute("msgErro", validacao);
 				model.addAttribute("form", notas);
 				return "usuario/professor/paginaNota";
 			}
 		}
-		
-		if(n.size() > 0) {
+
+		if (n.size() > 0) {
 			notas.setNotas(n);
 		}
-		
+
 		notaRepository.saveAll(notas.getNotas());
 		attr.addFlashAttribute("msgSucesso", "Notas salvas");
 
 		return "redirect:/diariosProfessor/busca";
 	}
-	
+
 	@GetMapping("/boletim/{id}")
 	public String boletim(@PathVariable("id") Integer idDiario, ModelMap model) {
 		model.addAttribute("u", retornarUsuario());
-		
+
 		Diario d = diarioRepository.findById(idDiario).get();
-		
+
 		List<Nota> notas = notaRepository.findByDiario(d.getId());
 		List<Usuario> alunosDiario = d.getEstudante();
-		
-		for(int i = 0; i < alunosDiario.size(); i++) {
+
+		for (int i = 0; i < alunosDiario.size(); i++) {
 			float soma = 0;
+			float media = 0;
 			List<Nota> enotas = notaRepository.findByAluno(alunosDiario.get(i).getNome());
-			for(int j = 0; j < enotas.size(); j++) {
+			for (int j = 0; j < enotas.size(); j++) {
 				soma = soma + enotas.get(j).getNota();
 			}
-			alunosDiario.get(i).setMedia(soma);
-			if(soma >= 24.0) {
+			media = soma / 4;
+			alunosDiario.get(i).setMedia(media);
+
+			if (media >= 6.0) {
 				alunosDiario.get(i).setSituacao("Aprovado");
-			}if(soma <= 24.0) {
-				if(soma + 10.0 >= 24.0) {
-					alunosDiario.get(i).setSituacao("Recuperação");
-				}else {
-					alunosDiario.get(i).setSituacao("Reprovado");
-				}
 			}
+			if (media >= 2.0 && media <= 6.0) {
+				alunosDiario.get(i).setSituacao("Recuperação");
+
+			}
+			if (media <= 2.0) {
+				alunosDiario.get(i).setSituacao("Reprovado");
+			}
+
 		}
-		
+
 		model.addAttribute("notas", notas);
 		model.addAttribute("diarios", d);
 		model.addAttribute("estudante", alunosDiario);
@@ -229,9 +233,10 @@ public class buscaDiarioProfessorController {
 		Usuario usuario = usuarioRepository.findByEmail(email).get();
 		return usuario;
 	}
-	private List<String> validarDados(Nota nota){
+
+	private List<String> validarDados(Nota nota) {
 		List<String> msgs = new ArrayList<>();
-		if(nota.getBimestre() == 0) {
+		if (nota.getBimestre() == 0) {
 			msgs.add("Escolha o Bimestre!");
 		}
 		return msgs;
