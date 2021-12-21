@@ -17,6 +17,10 @@ public interface NotaRepository extends JpaRepository<Nota,Integer> {
 	@Query("select n from Nota n where n.estudante.nome like %:estudante%") 
 	List<Nota> findByAluno(@Param("estudante") String estudante);
 	
+	@Query("select n from Nota n where n.estudante.nome like %:estudante%"
+			+ " and n.diario.nome like %:diario%") 
+	List<Nota> findByAlunoAndDiario(@Param("estudante") String estudante, @Param("diario") String diario );
+	
 	@Query("select n from Nota n where n.diario.id like :diario") 
 	List<Nota> findByDiario(@Param("diario") int id);
 	

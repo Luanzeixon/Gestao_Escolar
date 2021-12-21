@@ -202,11 +202,11 @@ public class buscaDiarioProfessorController {
 			float soma = 0;
 			float media = 0;
 			float recu = 0;
-			List<Nota> enotas = notaRepository.findByAluno(alunosDiario.get(i).getNome());
+			List<Nota> enotas = notaRepository.findByAlunoAndDiario(alunosDiario.get(i).getNome(), d.getNome());
 			for (int j = 0; j < enotas.size(); j++) {
-				if(enotas.get(j).getBimestre() == 5) {
+				if (enotas.get(j).getBimestre() == 5) {
 					recu = enotas.get(j).getNota();
-				}else {
+				} else {
 					soma = soma + enotas.get(j).getNota();
 				}
 			}
@@ -217,14 +217,14 @@ public class buscaDiarioProfessorController {
 				alunosDiario.get(i).setSituacao("Aprovado");
 			}
 			if (media >= 2.0 && media <= 6.0) {
-				if(recu == 0) {
+				if (recu == 0) {
 					alunosDiario.get(i).setSituacao("Recuperação");
-				}else {
+				} else {
 					media = (recu + media) / 2;
 					alunosDiario.get(i).setMedia(media);
 					if (media >= 6.0) {
 						alunosDiario.get(i).setSituacao("Aprovado");
-					}else {
+					} else {
 						alunosDiario.get(i).setSituacao("Reprovado");
 					}
 				}

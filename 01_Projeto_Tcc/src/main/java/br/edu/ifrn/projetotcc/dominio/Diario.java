@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Cascade;
+
 @Entity
 public class Diario {
 	
@@ -35,7 +37,7 @@ public class Diario {
 	@ManyToOne
 	private Disciplina disciplina;
 	
-	@OneToMany(mappedBy = "diario")
+	@OneToMany(mappedBy = "diario", cascade= {CascadeType.REMOVE})
 	private List<Nota> nota;
 	
 	@OneToMany(mappedBy = "diario")
