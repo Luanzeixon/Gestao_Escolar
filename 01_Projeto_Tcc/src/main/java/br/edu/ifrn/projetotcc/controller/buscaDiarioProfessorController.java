@@ -205,7 +205,7 @@ public class buscaDiarioProfessorController {
 			List<Nota> enotas = notaRepository.findByAlunoAndDiario(alunosDiario.get(i).getNome(), d.getNome());
 			for (int j = 0; j < enotas.size(); j++) {
 				if (enotas.get(j).getBimestre() == 5) {
-					recu = enotas.get(j).getNota();
+					recu = recu + enotas.get(j).getNota();
 				} else {
 					soma = soma + enotas.get(j).getNota();
 				}
