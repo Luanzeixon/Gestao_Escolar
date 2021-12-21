@@ -40,6 +40,21 @@
 		<hr>
 	</form>
 	<br/>
+	<form th:action="@{/notas/filtrarNota}" th:method="post">
+			
+			<select th:name="bimestre" class="form-select"
+				aria-label="Default select example">
+				<option th:value="0" selected>Escolha Bimestre</option>
+				<option th:value="1">1 Bimestre</option>
+				<option th:value="2" >2 Bimestre</option>
+				<option th:value="3">3 Bimestre</option>
+				<option th:value="4">4 Bimestre</option>
+				<option th:value="5">Recuperação</option>
+			</select> <br> <input class="btn btn-primary" type="submit"
+				value="filtrar">
+		<hr>
+		</form>
+		<br/>
 	<div th:if="${not #lists.isEmpty(notasEncontradas)}" class="table-wrapper-scroll-y my-custom-scrollbar">
 		<table class="table table-bordered table-striped mb-0">
 			<tr style="color: white; background-image: linear-gradient(125deg, #3ce7d9, #064497);">

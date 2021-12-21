@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -99,6 +100,24 @@ public class buscaNotaController {
 		model.addAttribute("notas", n); 
 		 
 		return "usuario/professor/paginaNota";
+	}
+	
+	@PostMapping("/filtrarNota")
+	@Transactional(readOnly = false)
+	public String filtarNota(@RequestParam(name = "bimestre", required = false) String bimestre, ModelMap model) {
+		model.addAttribute("u", retornarUsuario());
+		
+		int b = Integer.parseInt(bimestre);
+		
+		if(b != 0) {
+			List<Nota> notasEncontradas = notaRepository.findByBimestre(b);
+			model.addAttribute("notasEncontradas", notasEncontradas);
+		}
+		
+		
+
+		return "usuario/professor/buscaNota";
+
 	}
 	
 	public Usuario retornarUsuario() {

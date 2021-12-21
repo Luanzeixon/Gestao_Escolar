@@ -241,6 +241,8 @@ public class buscaDiarioProfessorController {
 		model.addAttribute("estudante", alunosDiario);
 		return "usuario/professor/paginaBoletim";
 	}
+	
+	
 
 	public Usuario retornarUsuario() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
