@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 @Entity
 public class Nota {
@@ -26,6 +27,12 @@ public class Nota {
 	
 	@ManyToOne(cascade=CascadeType.PERSIST)
 	private Usuario estudante;
+	
+	@Transient
+	private float media;
+	
+	@Transient
+	private String situacao;
 
 	@Override
 	public int hashCode() {
@@ -88,5 +95,22 @@ public class Nota {
 	public void setBimestre(int bimestre) {
 		this.bimestre = bimestre;
 	}
+
+	public float getMedia() {
+		return media;
+	}
+
+	public void setMedia(float media) {
+		this.media = media;
+	}
+
+	public String getSituacao() {
+		return situacao;
+	}
+
+	public void setSituacao(String situacao) {
+		this.situacao = situacao;
+	}
+	
 	
 }
