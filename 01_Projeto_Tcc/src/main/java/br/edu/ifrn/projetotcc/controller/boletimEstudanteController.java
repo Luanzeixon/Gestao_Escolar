@@ -40,8 +40,31 @@ public class boletimEstudanteController {
 		model.addAttribute("u", retornarUsuario());
 		
 		List<Diario> diarios =  diarioRepository.findByEstudante(retornarUsuario().getId());
-		
-		
+		List<Nota> nota1 = new ArrayList<>();
+		List<Nota> nota2 = new ArrayList<>();
+		List<Nota> nota3 = new ArrayList<>();
+		List<Nota> nota4 = new ArrayList<>();
+		for(int i = 0; i < diarios.size(); i++) {
+			
+			Nota n1 = notaRepository.findByBimestreAndDiarioAndEstudante(1, 
+					diarios.get(i).getId(), retornarUsuario().getId());
+			nota1.add(n1);
+			Nota n2 = notaRepository.findByBimestreAndDiarioAndEstudante(2, 
+					diarios.get(i).getId(), retornarUsuario().getId());
+			nota2.add(n2);
+			Nota n3 = notaRepository.findByBimestreAndDiarioAndEstudante(3, 
+					diarios.get(i).getId(), retornarUsuario().getId());
+			nota3.add(n3);
+			Nota n4 = notaRepository.findByBimestreAndDiarioAndEstudante(4, 
+					diarios.get(i).getId(), retornarUsuario().getId());
+			nota4.add(n4);
+			
+			
+		}
+		model.addAttribute("nota1", nota1);
+		model.addAttribute("nota2", nota2);
+		model.addAttribute("nota3", nota3);
+		model.addAttribute("nota4", nota4);
 		model.addAttribute("diarios", diarios);
 		
 		return "/usuario/estudante/paginaBoletimEstudante";

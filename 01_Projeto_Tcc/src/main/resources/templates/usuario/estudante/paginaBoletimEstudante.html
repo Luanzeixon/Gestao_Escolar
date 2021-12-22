@@ -24,34 +24,41 @@
 		<br>
 		<h3>Boletim</h3>
 		<div th:replace="fragment/mensagens"></div>
-			<div th:if="${not #lists.isEmpty(diarios)}"
-				class="table-wrapper-scroll-y my-custom-scrollbar">
-				<br />
+		<div th:if="${not #lists.isEmpty(diarios)}"
+			class="table-wrapper-scroll-y my-custom-scrollbar">
+			<br />
 
-				<table class="table table-bordered table-striped mb-0">
-					<tr
-						style="color: white; background-image: linear-gradient(125deg, #064497, #3ce7d9);">
-						<th>Materia</th>
-						<th>Nota 1 bimestre</th>
-						<th>Nota 2 bimestre</th>
-						<th>Nota 3 bimestre</th>
-						<th>Nota 4 bimestre</th>
-						
-					</tr>
-					
-					<tr th:each="f, itemStat : *{diarios}">
-					
-						<td th:text="*{diarios[__${itemStat.index}__].disciplina.nome}"
-							class="form-control"></td>
-							
-							
-						
-						
+			<table class="table table-bordered table-striped mb-0">
+				<tr
+					style="color: white; background-image: linear-gradient(125deg, #064497, #3ce7d9);">
+					<th>Materia</th>
+					<th>1 bimestre</th>
+					<th>2 bimestre</th>
+					<th>3 bimestre</th>
+					<th>4 bimestre</th>
 
-					</tr>
-				</table>
-			</div>
-			
+				</tr>
+
+				<tr th:each="f, itemStat : *{diarios}">
+
+					<td th:text="*{diarios[__${itemStat.index}__].disciplina.nome}"
+						class="form-control"></td>
+						
+					<td th:text="*{nota1[__${itemStat.index}__].nota}"></td>
+					<td th:text="*{nota2[__${itemStat.index}__].nota}"></td>
+					<td th:text="*{nota3[__${itemStat.index}__].nota}"></td>
+					<td th:text="*{nota4[__${itemStat.index}__].nota}"></td>
+					
+					
+
+
+
+
+
+				</tr>
+			</table>
+		</div>
+
 	</section>
 
 </body>

@@ -113,12 +113,10 @@ public class buscaNotaController {
 			List<Nota> notasEncontradas = notaRepository.findByBimestre(b);
 			model.addAttribute("notasEncontradas", notasEncontradas);
 		}
-		
-		
-
 		return "usuario/professor/buscaNota";
 
 	}
+	
 	
 	public Usuario retornarUsuario() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
